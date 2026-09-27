@@ -8,7 +8,7 @@ The app has three main tabs:
 - **Apps**
 - **Appearance**
 
-VoidOS needs to be served over HTTPS by its Node/Vercel server so game and app launch routes, proxy service workers, and APIs work. A static GitHub Pages deployment is not sufficient.
+VoidOS needs to be served over HTTPS by its Node/Vercel server so game and app launch routes, proxy service workers, and APIs work. A static GitHub Pages deployment is not sufficient. The installable app starts at its launcher; pressing **Open VoidOS** creates an `about:blank#voidos` window containing the Games app.
 
 ## Install
 

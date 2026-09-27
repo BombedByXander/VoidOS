@@ -88,7 +88,7 @@
       <p class="features">Games <span aria-hidden="true">·</span> Apps <span aria-hidden="true">·</span> Appearance</p>
       <div class="actions">
         <button id="install-button" type="button">Install VoidOS</button>
-        <a class="open-link" href="/science">Open VoidOS</a>
+        <button class="open-link" id="open-button" type="button">Open VoidOS</button>
       </div>
       <p class="install-help" id="install-help">
         On iPhone or iPad, open the Share menu and choose “Add to Home Screen.”
@@ -102,19 +102,25 @@
       const installHelp = document.getElementById("install-help");
       const installStatus = document.getElementById("install-status");
       let deferredInstallPrompt = null;
-      const isStandalone =
-        window.matchMedia("(display-mode: standalone)").matches ||
-        window.navigator.standalone === true;
+      document.getElementById("open-button").addEventListener("click", () => {
+        const appWindow = window.open("about:blank#voidos", "_blank");
+        if (!appWindow) {
+          installStatus.textContent =
+            "Your browser blocked the blank window. Allow pop-ups for VoidOS, then try again.";
+          return;
+        }
 
-      if (isStandalone) {
-        window.location.replace("/science");
-      }
+        const appDocument = appWindow.document;
+        appDocument.open();
+        appDocument.write(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>VoidOS</title><style>html,body,iframe{width:100%;height:100%;margin:0;border:0;overflow:hidden;background:#090810}iframe{display:block}</style></head><body><iframe title="VoidOS" allow="autoplay; clipboard-read; clipboard-write; fullscreen; gamepad; picture-in-picture" allowfullscreen src="${new URL("/science", window.location.origin).href}"></iframe></body></html>`);
+        appDocument.close();
+      });
 
       window.addEventListener("beforeinstallprompt", (event) => {
         event.preventDefault();
         deferredInstallPrompt = event;
         installButton.textContent = "Install VoidOS";
-        installHelp.textContent = "Add VoidOS to your device. It opens directly to Games.";
+        installHelp.textContent = "Add VoidOS to your device. Open it, then launch into the about:blank#voidos app window.";
       });
 
       installButton.addEventListener("click", async () => {

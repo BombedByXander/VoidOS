@@ -1,18 +1,4 @@
 (() => {
-  const isStandalone =
-    window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone === true;
-  const isTopLevel = window.self === window.top;
-
-  if (
-    isStandalone &&
-    isTopLevel &&
-    (window.location.pathname === "/" || window.location.pathname === "/index.html")
-  ) {
-    window.location.replace("/science");
-    return;
-  }
-
   if (!document.querySelector('link[rel="manifest"]')) {
     const manifest = document.createElement("link");
     manifest.rel = "manifest";
