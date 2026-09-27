@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Classroom</title>
+    <link rel="icon" href="/media/google-classroom.svg" type="image/svg+xml" id="favicon">
+    <link rel="stylesheet" href="/css/theme.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body class="themes-page-shell">
+    <div class="navbar-container"></div>
+    <div id="blobs"><div class="gradiant"></div><div class="gradiant2"></div><div class="gradiant3"></div></div>
+    <div id="particles-js"></div>
+    <main class="themes-page">
+      <i class="fa-solid fa-palette" style="font-size: 38px; color: var(--primary-color)" aria-hidden="true"></i>
+      <h1>Apperance</h1>
+      <p class="themes-subtitle">Choose the look and feel of VoidOS.</p>
+      <section class="appearance-controls" aria-label="Appearance controls">
+        <article class="appearance-control">
+          <h2>Background image</h2>
+          <p>Choose a background or use your own image URL.</p>
+          <select id="appearance-background" class="appearance-input">
+            <option value="default">None</option>
+            <option value="audi">Audi</option>
+            <option value="windows">Windows</option>
+            <option value="macosdark">macOS Dark</option>
+            <option value="windowsdark">Windows Dark</option>
+            <option value="custom">Custom URL</option>
+          </select>
+          <input id="appearance-background-url" class="appearance-input" type="url" placeholder="https://example.com/image.jpg" aria-label="Custom background image URL" />
+        </article>
+        <article class="appearance-control">
+          <h2>Visual effects</h2>
+          <p>Control the animated layers behind the page.</p>
+          <label class="appearance-toggle"><input id="appearance-blobs" type="checkbox" /><span>Blobs</span></label>
+          <label class="appearance-toggle"><input id="appearance-particles" type="checkbox" /><span>Particles</span></label>
+        </article>
+        <article class="appearance-control">
+          <h2>Tips</h2>
+          <p>Turn helpful tips off across the site.</p>
+          <label class="appearance-toggle"><input id="appearance-disable-tips" type="checkbox" /><span>Disable tips</span></label>
+        </article>
+        <article class="appearance-control appearance-tuning" aria-label="Display tuning">
+          <h2>Display tuning</h2>
+          <div class="tuning-grid">
+            <label class="tuning-control" for="appearance-text-scale-range">
+              <span>Text size</span>
+              <div class="tuning-inputs"><input id="appearance-text-scale-range" type="range" min="80" max="140" step="1" /><input id="appearance-text-scale" type="number" min="80" max="140" step="1" aria-label="Text size percentage" /><span>%</span></div>
+            </label>
+            <label class="tuning-control" for="appearance-contrast-range">
+              <span>Contrast</span>
+              <div class="tuning-inputs"><input id="appearance-contrast-range" type="range" min="70" max="140" step="1" /><input id="appearance-contrast" type="number" min="70" max="140" step="1" aria-label="Contrast percentage" /><span>%</span></div>
+            </label>
+            <label class="tuning-control" for="appearance-saturation-range">
+              <span>Saturation</span>
+              <div class="tuning-inputs"><input id="appearance-saturation-range" type="range" min="0" max="180" step="1" /><input id="appearance-saturation" type="number" min="0" max="180" step="1" aria-label="Saturation percentage" /><span>%</span></div>
+            </label>
+          </div>
+        </article>
+        <article class="appearance-control potato-mode-control">
+          <h2>Potato Mode</h2>
+          <p>Turn off visual effects and motion for a lighter, faster site.</p>
+          <label class="appearance-toggle"><input id="appearance-potato-mode" type="checkbox" /><span>Enable Potato Mode</span></label>
+        </article>
+      </section>
+      <section id="topography-settings" class="topography-settings" hidden aria-label="Topography settings">
+        <div class="topography-settings-heading"><div><h2>Topography settings</h2><p>Customize the animated contour background for this theme only.</p></div><button id="topography-reset" type="button">Reset</button></div>
+        <div id="topography-controls" class="topography-controls"></div>
+      </section>
+      <section class="themes-card">
+        <div class="themes-grid" id="themes-grid" aria-label="Available themes"></div>
+        <p id="theme-status" class="themes-status" role="status"></p>
+      </section>
+    </main>
+    <script src="/js/nav.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const grid = document.getElementById("themes-grid");
+        const status = document.getElementById("theme-status");
+        const themes = [
+          ["nova", "Nova", "#9282fb", "#b263a6", "#090810"], ["flux", "Flux", "#ff7b72", "#f2cc60", "#17151f"],
+          ["space", "Space OLED", "#86a8ff", "#d17cff", "#05070d"], ["ocean", "Jellyfish", "#67f3d1", "#6ac7ff", "#030d13"],
+          ["volcanic", "Volcanic Eclipse", "#ffb347", "#ff5c38", "#090507"], ["forest", "Haunted Forest", "#8de38d", "#3d9b73", "#07130e"],
+          ["campfire", "Campfire Glow", "#ffb347", "#ff6b35", "#1a0c08"], ["hacker", "Hacker", "#54ff9b", "#16c784", "#050b08"],
+          ["v8dark", "V8 Dark", "#ef4444", "#f59e0b", "#0b0b0c"], ["v8light", "V8 Light", "#dc2626", "#f97316", "#f4f4f5"],
+          ["voidpurple", "Void Purple", "#c084fc", "#7c3aed", "#0e0718"], ["burgundy", "RGB Grid", "#ff8f9c", "#9f1239", "#16070d"], ["anniversary", "1 Year Anniversary", "#ffcf33", "#ff5ca8", "#180d25"],
+          ["tompearl", "Tom Pearl", "#ffffff", "#e5e7eb", "#080808"], ["topography", "Topography", "#3300ff", "#84cc16", "#09090b"], ["midnightoled", "VSCode", "#4fc1ff", "#c586c0", "#111111"],
+          ["rift", "Rift", "#5eead4", "#38bdf8", "#08131a"], ["echo", "Echo", "#f9a8d4", "#c084fc", "#170c1b"],
+          ["drift", "Drift", "#93c5fd", "#67e8f9", "#08131d"], ["coal", "Coal", "#a3a3a3", "#525252", "#111111"],
+          ["mintx", "Mint", "#6ee7b7", "#34d399", "#071713"], ["bloom", "Bloom", "#f9a8d4", "#fb7185", "#1b0913"],
+          ["frostx", "Frost", "#bae6fd", "#818cf8", "#08111c"], ["duskx", "Dusk", "#f0abfc", "#818cf8", "#120b1f"],
+          ["heaven", "Heaven", "#fef3c7", "#93c5fd", "#14233a"], ["light", "V7 Light", "#a772ca", "#ae91ff", "#ffffff"],
+          ["default", "V7 Dark", "#9282fb", "#b263a6", "#090810"], ["v6", "V6", "#8401ff", "#8401ff", "#000000"],
+          ["greypurple", "Grey Purple", "#2b2b2b", "#2a2a2a", "#2b2b2b"], ["audi", "Audi", "#f50537", "#f50537", "#242627"],
+          ["new", "Cool Purple", "#aa09ac", "#8700ff", "#8700ff"], ["pink", "Pink", "#ff0099", "#a23ac2", "#000000"],
+          ["grey", "Grey", "#6b6b6b", "#333333", "#141414"], ["ssb", "Surf Shark Blue", "#00b5cf", "#008599", "#000000"],
+          ["greyblack", "Grey Black", "#707070", "#1b1b1b", "#6a6161"], ["ghost", "Black & Red", "#a05555", "#8d5e3f", "#3f1c1c"],
+          ["blue", "Blue", "#2700ff", "#0058ff", "#000000"], ["bone", "Bonelab", "#818181", "#383838", "#000000"],
+          ["gb", "Greyish Blue", "#22223b", "#080b2b", "#4a4e69"], ["gg", "Greyish Green", "#5e999b", "#48606d", "#2f3e46"],
+          ["brown", "Brown", "#8a817c", "#313131", "#463f3a"], ["dg", "Dark Orange", "#ee6c4d", "#f08f77", "#293241"],
+          ["moon", "Moon", "#4a4e69", "#37375f", "#22223b"], ["red", "Red", "#430708", "#470000", "#a4161a"],
+          ["sblue", "Sahara Blue", "#0048b4", "#034078", "#001f54"], ["mocha", "Mocha", "#caa6f7", "#a789ca", "#1e1e2e"],
+          ["orange", "Orange", "#ffa600", "#b97900", "#000000"], ["youtube-dark", "YouTube Dark", "#af0000", "#b90000", "#000000"],
+          ["3kh0", "3kh0", "#22c55e", "#1caa50", "#121212"], ["artclass", "Art Class", "#0284d4", "#0567a3", "#1a2023"],
+          ["starlight", "Starlight", "#155e75", "#186d86", "#121c22"],
+          ["aurora", "Aurora", "#7dd3fc", "#c084fc", "#07111f"], ["cyberpunk", "Cyberpunk", "#f0abfc", "#22d3ee", "#10051a"],
+          ["ember", "Ember", "#fb923c", "#ef4444", "#1a0805"], ["lavender", "Lavender", "#c4b5fd", "#f0abfc", "#130d21"],
+          ["sapphire", "Sapphire", "#60a5fa", "#2563eb", "#061329"], ["rosewood", "Rosewood", "#fb7185", "#be123c", "#1b070d"],
+          ["emerald", "Emerald", "#6ee7b7", "#10b981", "#061711"], ["solar", "Solar Flare", "#fde047", "#f97316", "#1a1004"],
+          ["nebula", "Nebula", "#e879f9", "#818cf8", "#0d0820"], ["midnight", "Midnight", "#93c5fd", "#475569", "#05070d"],
+          ["synthwave", "Synthwave", "#fb7185", "#a855f7", "#16051d"], ["terminal", "Terminal", "#4ade80", "#15803d", "#020c05"],
+          ["paper", "Paper", "#334155", "#64748b", "#f8fafc"], ["coffee", "Coffee", "#fbbf24", "#a16207", "#1c120c"],
+          ["sakura", "Sakura", "#f9a8d4", "#f472b6", "#1c0a16"], ["arctic", "Arctic", "#e0f2fe", "#38bdf8", "#071521"],
+          ["desert", "Desert", "#fed7aa", "#c2410c", "#1c1007"], ["toxic", "Toxic", "#bef264", "#65a30d", "#0b1205"],
+          ["oceanic", "Oceanic", "#67e8f9", "#0e7490", "#03141c"], ["monochrome", "Monochrome", "#f8fafc", "#94a3b8", "#0f1115"],
+          ["plasma", "Plasma", "#f472b6", "#7c3aed", "#18051d"], ["sunset", "Sunset", "#fdba74", "#f43f5e", "#1f0b0b"],
+          ["rainforest", "Rainforest", "#86efac", "#15803d", "#04150d"], ["royal", "Royal", "#c4b5fd", "#4338ca", "#0c0820"],
+           ["grape", "Grape", "#d8b4fe", "#9333ea", "#12071e"],
+          ["icefire", "Icefire", "#bae6fd", "#f97316", "#0a111b"], ["matrix", "Matrix", "#86efac", "#22c55e", "#010a04"],
+          ["candy", "Candy", "#f9a8d4", "#60a5fa", "#180b1c"], ["graphite", "Graphite", "#e2e8f0", "#64748b", "#0b0e13"],
+          ["neonlime", "Neon Lime", "#d9f99d", "#a3e635", "#0c1305"], ["deepsea", "Deep Sea", "#5eead4", "#0f766e", "#021312"],
+          ["cosmic", "Cosmic", "#f0abfc", "#6366f1", "#09051a"], ["ultraviolet", "Ultraviolet", "#e9d5ff", "#6d28d9", "#0b0415"],
+          ["watermelon", "Watermelon", "#fda4af", "#4ade80", "#110c0b"],
+          ["glassmorphism", "Glassmorphism", "#a5b4fc", "#67e8f9", "#0b1020"],
+          ["blueprint", "Blueprint", "#93c5fd", "#38bdf8", "#06152a"],
+          ["papertrail", "Paper Trail", "#475569", "#94a3b8", "#f1ede4"],
+          ["synthgrid", "Synth Grid", "#f0abfc", "#22d3ee", "#12051f"],
+          ["neonnoir", "Neon Noir", "#f43f5e", "#06b6d4", "#080a14"],
+          ["biolume", "Biolume", "#5eead4", "#a3e635", "#031613"],
+          ["desertnight", "Desert Night", "#fbbf24", "#fb7185", "#170b08"],
+          ["moonlit", "Moonlit", "#c4b5fd", "#93c5fd", "#080b19"],
+
+          ["lavenderfog", "Lavender Fog", "#ddd6fe", "#c084fc", "#120d1e"],
+          ["pixelwave", "Pixelwave", "#facc15", "#38bdf8", "#0a1022"],
+          ["terminalrain", "Terminal Rain", "#86efac", "#22c55e", "#020b05"],
+          ["auroraveil", "Aurora Veil", "#99f6e4", "#f0abfc", "#06121c"],
+          ["prism", "Prism", "#f9a8d4", "#a78bfa", "#100a1c"],
+          ["inkwash", "Ink Wash", "#e2e8f0", "#94a3b8", "#111827"],
+          ["velvet", "Velvet", "#fda4af", "#c084fc", "#1a0815"],
+          ["citrus", "Citrus Pop", "#bef264", "#facc15", "#111507"],
+          ["rosegalaxy", "Rose Galaxy", "#f9a8d4", "#818cf8", "#160914"],
+          ["circuit", "Circuit Board", "#4ade80", "#22d3ee", "#03110c"],
+          ["topaz", "Topaz", "#fde68a", "#f59e0b", "#171006"],
+          ["obsidian", "Obsidian", "#e5e7eb", "#6b7280", "#050608"],
+          ["cloudnine", "Cloud Nine", "#e0f2fe", "#c4b5fd", "#111827"],
+          ["mintglass", "Mint Glass", "#99f6e4", "#6ee7b7", "#061512"],
+          ["magma", "Magma", "#fb923c", "#dc2626", "#170504"],
+          ["starforge", "Star Forge", "#fde68a", "#a78bfa", "#090817"],
+          ["oceanfloor", "Ocean Floor", "#67e8f9", "#14b8a6", "#02131b"],
+          ["hologram", "Hologram", "#67e8f9", "#e879f9", "#080b18"],
+          ["arcade", "Arcade Cabinet", "#f43f5e", "#facc15", "#130611"],
+          ["sakuradrift", "Sakura Drift", "#fbcfe8", "#f472b6", "#190b16"],
+          ["carbon", "Carbon Fiber", "#d1d5db", "#6b7280", "#0b0d10"],
+          ["twilight", "Twilight", "#c4b5fd", "#fb7185", "#110b1b"],
+          ["storm", "Stormfront", "#cbd5e1", "#60a5fa", "#080f1a"],
+          ["glacier", "Glacier", "#e0f2fe", "#38bdf8", "#06121c"],
+          ["candyland", "Candyland", "#f9a8d4", "#fcd34d", "#180b17"],
+          ["fractal", "Fractal Bloom", "#c084fc", "#f472b6", "#100719"],
+          ["moss", "Mossy Stone", "#bef264", "#84cc16", "#081008"],
+          ["honeycomb", "Honeycomb", "#fde68a", "#f59e0b", "#171005"],
+          ["blacklight", "Blacklight", "#d946ef", "#7c3aed", "#0d0314"],
+          ["chrome", "Chrome", "#f8fafc", "#94a3b8", "#111318"],
+          ["vapor", "Vapor Trails", "#f0abfc", "#818cf8", "#10091d"],
+          ["deepviolet", "Deep Violet", "#d8b4fe", "#7c3aed", "#090313"],
+          ["firewatch", "Firewatch", "#fdba74", "#ef4444", "#170806"],
+          ["seaglass", "Sea Glass", "#99f6e4", "#7dd3fc", "#061416"],
+          ["plum", "Plum Wine", "#f0abfc", "#be185d", "#180711"],
+          ["sandstorm", "Sandstorm", "#fed7aa", "#d97706", "#181006"],
+          ["electricblue", "Electric Blue", "#93c5fd", "#2563eb", "#040b18"],
+          ["redshift", "Redshift", "#fca5a5", "#f97316", "#180605"],
+          ["datawave", "Datawave", "#67e8f9", "#818cf8", "#050b18"],
+          ["lunar", "Lunar Surface", "#d1d5db", "#9ca3af", "#0c0d12"],
+          ["koi", "Koi Pond", "#fb923c", "#f8fafc", "#071316"],
+          ["monochromegrid", "Monochrome Grid", "#f8fafc", "#64748b", "#0a0c10"],
+          ["parchment", "Parchment", "#78350f", "#b45309", "#eee4ce"],
+          ["iridescent", "Iridescent", "#a5f3fc", "#f0abfc", "#090e1c"],
+          ["acidrain", "Acid Rain", "#bef264", "#22d3ee", "#03100d"],
+          ["cosmos", "Cosmos", "#c4b5fd", "#f0abfc", "#070513"],
+          ["nightdrive", "Night Drive", "#38bdf8", "#f43f5e", "#050a16"],
+          ["aurorapink", "Aurora Pink", "#f9a8d4", "#5eead4", "#100914"],
+          ["inkblue", "Ink Blue", "#93c5fd", "#1d4ed8", "#050b18"],
+          ["goldenhour", "Golden Hour", "#fde68a", "#fb923c", "#1a0f04"],
+          ["thunder", "Thunder", "#e2e8f0", "#facc15", "#070b12"],
+          ["monsoon", "Monsoon", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["rainshadow", "Rainshadow", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["cloudbank", "Cloudbank", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["bluehour", "Bluehour", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["starlit", "Starlit", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["frostmoon", "Frostmoon", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["duskcloud", "Duskcloud", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["nightmist", "Nightmist", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["sunhalo", "Sunhalo", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["overcast", "Overcast", "#7dd3fc", "#c4b5fd", "#07111f"],
+          ["brass", "Brass", "#fbbf24", "#cbd5e1", "#111216"],
+          ["bronze", "Bronze", "#fbbf24", "#cbd5e1", "#111216"],
+          ["pewter", "Pewter", "#fbbf24", "#cbd5e1", "#111216"],
+          ["silverleaf", "Silverleaf", "#fbbf24", "#cbd5e1", "#111216"],
+          ["ironwood", "Ironwood", "#fbbf24", "#cbd5e1", "#111216"],
+          ["marbled", "Marbled", "#fbbf24", "#cbd5e1", "#111216"],
+          ["slate", "Slate", "#fbbf24", "#cbd5e1", "#111216"],
+          ["alabaster", "Alabaster", "#fbbf24", "#cbd5e1", "#111216"],
+          ["basalt", "Basalt", "#fbbf24", "#cbd5e1", "#111216"],
+          ["terracotta", "Terracotta", "#fbbf24", "#cbd5e1", "#111216"],
+
+          ["pine", "Pine", "#86efac", "#bef264", "#07120b"],
+          ["cedar", "Cedar", "#86efac", "#bef264", "#07120b"],
+          ["wildflower", "Wildflower", "#86efac", "#bef264", "#07120b"],
+          ["lavenderfield", "Lavenderfield", "#86efac", "#bef264", "#07120b"],
+          ["meadow", "Meadow", "#86efac", "#bef264", "#07120b"],
+          ["alpine", "Alpine", "#86efac", "#bef264", "#07120b"],
+          ["riverstone", "Riverstone", "#86efac", "#bef264", "#07120b"],
+          ["sequoia", "Sequoia", "#86efac", "#bef264", "#07120b"],
+          ["eucalyptus", "Eucalyptus", "#86efac", "#bef264", "#07120b"],
+          ["neonpulse", "Neonpulse", "#f0abfc", "#22d3ee", "#10061b"],
+          ["glowstick", "Glowstick", "#f0abfc", "#22d3ee", "#10061b"],
+          ["cyberglow", "Cyberglow", "#f0abfc", "#22d3ee", "#10061b"],
+          ["chroma", "Chroma", "#f0abfc", "#22d3ee", "#10061b"],
+          ["neonpetal", "Neonpetal", "#f0abfc", "#22d3ee", "#10061b"],
+          ["plasmawave", "Plasmawave", "#f0abfc", "#22d3ee", "#10061b"],
+          ["afterimage", "Afterimage", "#f0abfc", "#22d3ee", "#10061b"],
+          ["neonflare", "Neonflare", "#f0abfc", "#22d3ee", "#10061b"],
+
+          ["cassette", "Cassette", "#f472b6", "#facc15", "#140914"],
+          ["polaroid", "Polaroid", "#f472b6", "#facc15", "#140914"],
+          ["gameboy", "Gameboy", "#f472b6", "#facc15", "#140914"],
+          ["atari", "Atari", "#f472b6", "#facc15", "#140914"],
+          ["retrowave", "Retrowave", "#f472b6", "#facc15", "#140914"],
+          ["pixelparty", "Pixelparty", "#f472b6", "#facc15", "#140914"],
+          ["crt", "Crt", "#f472b6", "#facc15", "#140914"],
+          ["outrun", "Outrun", "#f472b6", "#facc15", "#140914"],
+          ["arcadefilm", "Arcadefilm", "#f472b6", "#facc15", "#140914"],
+          ["tessellate", "Tessellate", "#a78bfa", "#67e8f9", "#0b0a1b"],
+          ["kaleido", "Kaleido", "#a78bfa", "#67e8f9", "#0b0a1b"],
+
+          ["triangulate", "Triangulate", "#a78bfa", "#67e8f9", "#0b0a1b"],
+          ["hexfield", "Hexfield", "#a78bfa", "#67e8f9", "#0b0a1b"],
+          ["circles", "Circles", "#a78bfa", "#67e8f9", "#0b0a1b"],
+          ["chevrons", "Chevrons", "#a78bfa", "#67e8f9", "#0b0a1b"],
+          ["isometric", "Isometric", "#a78bfa", "#67e8f9", "#0b0a1b"],
+          ["wireframe", "Wireframe", "#a78bfa", "#67e8f9", "#0b0a1b"],
+          ["diamondcut", "Diamondcut", "#a78bfa", "#67e8f9", "#0b0a1b"],
+
+          ["elevation", "Elevation", "#93c5fd", "#84cc16", "#07101a"],
+          ["faultline", "Faultline", "#93c5fd", "#84cc16", "#07101a"],
+          ["terrain", "Terrain", "#93c5fd", "#84cc16", "#07101a"],
+          ["ridgewalk", "Ridgewalk", "#93c5fd", "#84cc16", "#07101a"],
+          ["canyon", "Canyon", "#93c5fd", "#84cc16", "#07101a"],
+          ["basin", "Basin", "#93c5fd", "#84cc16", "#07101a"],
+          ["summit", "Summit", "#93c5fd", "#84cc16", "#07101a"],
+          ["depthmap", "Depthmap", "#93c5fd", "#84cc16", "#07101a"],
+          ["geodesic", "Geodesic", "#93c5fd", "#84cc16", "#07101a"],
+          ["inkripple", "Inkripple", "#67e8f9", "#f0abfc", "#07131b"],
+          ["oilspill", "Oilspill", "#67e8f9", "#f0abfc", "#07131b"],
+          ["rainbowink", "Rainbowink", "#67e8f9", "#f0abfc", "#07131b"],
+          ["mercury", "Mercury", "#67e8f9", "#f0abfc", "#07131b"],
+          ["tidalglass", "Tidalglass", "#67e8f9", "#f0abfc", "#07131b"],
+          ["bubblebath", "Bubblebath", "#67e8f9", "#f0abfc", "#07131b"],
+          ["liquidgold", "Liquidgold", "#67e8f9", "#f0abfc", "#07131b"],
+          ["seafluid", "Seafluid", "#67e8f9", "#f0abfc", "#07131b"],
+          ["soapfilm", "Soapfilm", "#67e8f9", "#f0abfc", "#07131b"],
+          ["chromedrip", "Chromedrip", "#67e8f9", "#f0abfc", "#07131b"],
+
+          ["architect", "Architect", "#38bdf8", "#f97316", "#07111b"],
+          ["schematic", "Schematic", "#38bdf8", "#f97316", "#07111b"],
+          ["gridpaper", "Gridpaper", "#38bdf8", "#f97316", "#07111b"],
+          ["machinery", "Machinery", "#38bdf8", "#f97316", "#07111b"],
+          ["blueprintred", "Blueprintred", "#38bdf8", "#f97316", "#07111b"],
+          ["engineering", "Engineering", "#38bdf8", "#f97316", "#07111b"],
+          ["workshop", "Workshop", "#38bdf8", "#f97316", "#07111b"],
+          ["circuitplan", "Circuitplan", "#38bdf8", "#f97316", "#07111b"],
+          ["floorplan", "Floorplan", "#38bdf8", "#f97316", "#07111b"],
+          ["newsprint", "Newsprint", "#64748b", "#f8fafc", "#ece7dc"],
+
+          ["notebook", "Notebook", "#64748b", "#f8fafc", "#ece7dc"],
+          ["ledger", "Ledger", "#64748b", "#f8fafc", "#ece7dc"],
+          ["bluepaper", "Bluepaper", "#64748b", "#f8fafc", "#ece7dc"],
+          ["graphitepaper", "Graphitepaper", "#64748b", "#f8fafc", "#ece7dc"],
+          ["origami", "Origami", "#64748b", "#f8fafc", "#ece7dc"],
+          ["postcard", "Postcard", "#64748b", "#f8fafc", "#ece7dc"],
+          ["bookcloth", "Bookcloth", "#64748b", "#f8fafc", "#ece7dc"],
+          ["risograph", "Risograph", "#64748b", "#f8fafc", "#ece7dc"],
+          ["wildfire", "Wildfire", "#fb923c", "#ef4444", "#170704"],
+          ["coalglow", "Coalglow", "#fb923c", "#ef4444", "#170704"],
+          ["hearth", "Hearth", "#fb923c", "#ef4444", "#170704"],
+          ["sparktrail", "Sparktrail", "#fb923c", "#ef4444", "#170704"],
+          ["ashfall", "Ashfall", "#fb923c", "#ef4444", "#170704"],
+          ["flareup", "Flareup", "#fb923c", "#ef4444", "#170704"],
+
+          ["smokestack", "Smokestack", "#fb923c", "#ef4444", "#170704"],
+          ["hotmetal", "Hotmetal", "#fb923c", "#ef4444", "#170704"],
+          ["sunburn", "Sunburn", "#fb923c", "#ef4444", "#170704"],
+          ["kelpforest", "Kelpforest", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["deepcurrent", "Deepcurrent", "#2dd4bf", "#38bdf8", "#03151b"],
+
+          ["seabed", "Seabed", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["coralreef", "Coralreef", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["saltwater", "Saltwater", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["wavecrest", "Wavecrest", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["shipwreck", "Shipwreck", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["marineroom", "Marineroom", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["undertow", "Undertow", "#2dd4bf", "#38bdf8", "#03151b"],
+          ["datastream", "Datastream", "#86efac", "#22d3ee", "#020c08"],
+          ["codefall", "Codefall", "#86efac", "#22d3ee", "#020c08"],
+          ["terminalgreen", "Terminalgreen", "#86efac", "#22d3ee", "#020c08"],
+
+
+          ["mainframe", "Mainframe", "#86efac", "#22d3ee", "#020c08"],
+          ["bitshift", "Bitshift", "#86efac", "#22d3ee", "#020c08"],
+          ["greencode", "Greencode", "#86efac", "#22d3ee", "#020c08"],
+          ["syntax", "Syntax", "#86efac", "#22d3ee", "#020c08"],
+          ["serverroom", "Serverroom", "#86efac", "#22d3ee", "#020c08"],
+          ["frostedglass", "Frostedglass", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["rainonglass", "Rainonglass", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["stainedglass", "Stainedglass", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["smokeglass", "Smokeglass", "#e0f2fe", "#f9a8d4", "#0b1118"],
+
+          ["glasshouse", "Glasshouse", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["crystalroom", "Crystalroom", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["mirrorglow", "Mirrorglow", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["iceglass", "Iceglass", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["prismglass", "Prismglass", "#e0f2fe", "#f9a8d4", "#0b1118"],
+          ["coralhour", "Coralhour", "#fdba74", "#f472b6", "#180a0a"],
+          ["peachsky", "Peachsky", "#fdba74", "#f472b6", "#180a0a"],
+          ["goldsky", "Goldsky", "#fdba74", "#f472b6", "#180a0a"],
+          ["violetdusk", "Violetdusk", "#fdba74", "#f472b6", "#180a0a"],
+          ["horizon", "Horizon", "#fdba74", "#f472b6", "#180a0a"],
+          ["afterglow", "Afterglow", "#fdba74", "#f472b6", "#180a0a"],
+
+          ["twilightrose", "Twilightrose", "#fdba74", "#f472b6", "#180a0a"],
+          ["amberhaze", "Amberhaze", "#fdba74", "#f472b6", "#180a0a"],
+          ["lastlight", "Lastlight", "#fdba74", "#f472b6", "#180a0a"],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ];
+        const current = localStorage.getItem("theme") || "nova";
+        const applyTheme = (nextTheme, label) => {
+          localStorage.setItem("theme", nextTheme);
+          document.documentElement.setAttribute("theme", nextTheme);
+          document.body.setAttribute("theme", nextTheme);
+          window.updateParticles?.();
+          window.syncAnniversaryRain?.(nextTheme);
+          window.syncTomPearlPaint?.(nextTheme);
+          window.syncTopography?.(nextTheme);
+          if (typeof syncTopoPanel === "function") syncTopoPanel(nextTheme);
+          window.__xandersarcadeApplyTheme?.(nextTheme);
+          window.dispatchEvent(new CustomEvent("xandersarcade-theme-change", { detail: { theme: nextTheme } }));
+          window.__xandersarcadeThemeChannel?.postMessage?.({ type: "theme", value: nextTheme });
+          document.querySelectorAll(".theme-option").forEach((card) => card.classList.toggle("active", card.dataset.theme === nextTheme));
+          status.textContent = `Theme changed to ${label}`;
+        };
+        themes.forEach(([value, label, primary, accent, background]) => {
+          label = label.replace(/^[^—]+—\s*/, "");
+          const card = document.createElement("button");
+          card.type = "button";
+          card.className = `theme-option${value === current ? " active" : ""}`;
+          card.dataset.theme = value;
+          card.style.setProperty("--theme-primary", primary);
+          card.style.setProperty("--theme-accent", accent);
+          card.style.setProperty("--theme-background", background);
+          card.innerHTML = `<span class="theme-option-name">${label}</span><span class="theme-option-palette" aria-hidden="true"><i></i><i></i><i></i></span>`;
+          card.addEventListener("click", () => applyTheme(value, label));
+          grid.appendChild(card);
+        });
+
+        const topographyPanel = document.getElementById("topography-settings");
+        const topoControls = document.getElementById("topography-controls");
+        const topoDefaults = { lowColor: "#3300ff", midColor: "#84cc16", highColor: "#ffffff", speed: 0.35, morphAmount: 3, morphSpeed: 0.05, bands: 2, thickness: 0.01, scale: 2, pixelSize: 1, glow: 0.5, colorMode: "elevation", contrast: 3, brightness: 1, fillBands: false, opacity: 1, grain: true, grainIntensity: 0.05, cursorElevation: true, cursorRadius: 0.3, cursorStrength: 0.4, lightMode: false };
+        let topoSettings = { ...topoDefaults };
+        try { topoSettings = { ...topoSettings, ...JSON.parse(localStorage.getItem("topographySettings") || "{}") }; } catch {}
+        const topoFields = [
+          ["lowColor", "Low Color", "color"], ["midColor", "Mid Color", "color"], ["highColor", "High Color", "color"],
+          ["speed", "Speed", "range", 0, 2, 0.01], ["morphAmount", "Morph Amount", "range", 0, 8, 0.1], ["morphSpeed", "Morph Speed", "range", 0, 0.2, 0.005],
+          ["bands", "Bands", "range", 1, 8, 0.1], ["thickness", "Thickness", "range", 0.001, 0.08, 0.001], ["scale", "Scale", "range", 0.25, 5, 0.05],
+          ["pixelSize", "Pixel Size", "range", 1, 8, 1], ["glow", "Glow", "range", 0, 2, 0.05], ["colorMode", "Color Mode", "select"],
+          ["contrast", "Contrast", "range", 0.1, 6, 0.1], ["brightness", "Brightness", "range", 0, 3, 0.05], ["fillBands", "Fill Bands", "checkbox"],
+          ["grain", "Grain", "checkbox"], ["grainIntensity", "Grain Intensity", "range", 0, 0.3, 0.01], ["opacity", "Opacity", "range", 0, 1, 0.01],
+          ["cursorElevation", "Cursor Elevation", "checkbox"], ["cursorRadius", "Cursor Radius", "range", 0.05, 1, 0.01], ["cursorStrength", "Cursor Strength", "range", 0, 2, 0.01]
+        ];
+        const saveTopo = (key, value) => { topoSettings[key] = value; localStorage.setItem("topographySettings", JSON.stringify(topoSettings)); window.updateTopography?.({ [key]: value }); };
+        topoFields.forEach(([key, label, type, min, max, step]) => {
+          const wrap = document.createElement("label"); wrap.className = `topography-control ${type === "color" ? "topography-color" : ""}`;
+          if (type === "color") { wrap.innerHTML = `<span>${label}</span><input type="color" value="${topoSettings[key]}"><code>${topoSettings[key]}</code>`; const input = wrap.querySelector("input"), code = wrap.querySelector("code"); input.addEventListener("input", () => { code.textContent = input.value; saveTopo(key, input.value); }); }
+          else if (type === "checkbox") { wrap.innerHTML = `<span>${label}</span><input type="checkbox" ${topoSettings[key] ? "checked" : ""}>`; wrap.querySelector("input").addEventListener("change", (e) => saveTopo(key, e.target.checked)); }
+          else if (type === "select") { wrap.innerHTML = `<span>${label}</span><select><option value="elevation">Elevation</option><option value="uniform">Uniform</option><option value="alternating">Alternating</option></select>`; const input = wrap.querySelector("select"); input.value = topoSettings[key]; input.addEventListener("change", () => saveTopo(key, input.value)); }
+          else { wrap.innerHTML = `<span>${label}<output>${topoSettings[key]}</output></span><input type="range" min="${min}" max="${max}" step="${step}" value="${topoSettings[key]}">`; const input = wrap.querySelector("input"), output = wrap.querySelector("output"); input.addEventListener("input", () => { output.value = input.value; saveTopo(key, Number(input.value)); }); }
+          topoControls.appendChild(wrap);
+        });
+        const syncTopoPanel = (value) => { topographyPanel.hidden = value !== "topography"; };
+        syncTopoPanel(current);
+        document.getElementById("topography-reset").addEventListener("click", () => { localStorage.setItem("topographySettings", JSON.stringify(topoDefaults)); location.reload(); });
+
+        const backgroundSelect = document.getElementById("appearance-background");
+        const backgroundUrl = document.getElementById("appearance-background-url");
+        const blobs = document.getElementById("appearance-blobs");
+        const particles = document.getElementById("appearance-particles");
+        const disableTips = document.getElementById("appearance-disable-tips");
+        const potatoMode = document.getElementById("appearance-potato-mode");
+        const savedBackground = localStorage.getItem("backgroundImageDropdown") || "default";
+        backgroundSelect.value = savedBackground;
+        backgroundUrl.value = savedBackground === "custom" ? (localStorage.getItem("backgroundImage") || "") : "";
+        blobs.checked = localStorage.getItem("blobs") !== "false";
+        particles.checked = localStorage.getItem("stars") !== "false";
+        disableTips.checked = localStorage.getItem("disableTips") === "true";
+        potatoMode.checked = localStorage.getItem("xandersarcade-potato-mode") === "true";
+
+        const backgrounds = {
+          audi: "/./media/wallpapers/audi.gif",
+          windows: "/./media/wallpapers/windows.webp",
+          macosdark: "/./media/wallpapers/macosdark.jpg",
+          windowsdark: "/./media/wallpapers/windowsdark.webp",
+        };
+        const applyBackground = (url, dropdown) => {
+          localStorage.setItem("backgroundImageDropdown", dropdown);
+          if (url) {
+            localStorage.setItem("backgroundImage", url);
+            document.body.style.backgroundImage = `url(${url})`;
+          } else {
+            localStorage.removeItem("backgroundImage");
+            document.body.style.removeProperty("background-image");
+          }
+        };
+        backgroundSelect.addEventListener("change", () => {
+          const value = backgroundSelect.value;
+          if (value === "default") applyBackground("", value);
+          else if (value === "custom") backgroundUrl.focus();
+          else applyBackground(backgrounds[value], value);
+        });
+        backgroundUrl.addEventListener("change", () => {
+          if (backgroundUrl.value.trim()) applyBackground(backgroundUrl.value.trim(), "custom");
+        });
+        blobs.addEventListener("change", () => {
+          localStorage.setItem("blobs", String(blobs.checked));
+          document.getElementById("blobs").style.display = blobs.checked ? "block" : "none";
+        });
+        particles.addEventListener("change", () => {
+          localStorage.setItem("stars", String(particles.checked));
+          window.updateParticles?.();
+          const particlesLayer = document.getElementById("particles-js");
+          if (particlesLayer && !window.updateParticles) particlesLayer.style.display = particles.checked ? "block" : "none";
+        });
+        disableTips.addEventListener("change", () => {
+          localStorage.setItem("disableTips", String(disableTips.checked));
+        });
+        potatoMode.addEventListener("change", () => {
+          window.setPotatoMode?.(potatoMode.checked);
+        });
+
+        const tuning = [
+          ["appearanceTextScale", "appearance-text-scale-range", "appearance-text-scale", 80, 140, 100],
+          ["appearanceContrast", "appearance-contrast-range", "appearance-contrast", 70, 140, 100],
+          ["appearanceSaturation", "appearance-saturation-range", "appearance-saturation", 0, 180, 100],
+        ];
+        tuning.forEach(([key, rangeId, numberId, min, max, fallback]) => {
+          const range = document.getElementById(rangeId);
+          const number = document.getElementById(numberId);
+          const saved = Number(localStorage.getItem(key));
+          const initial = Number.isFinite(saved) ? Math.min(max, Math.max(min, saved)) : fallback;
+          range.value = initial;
+          number.value = initial;
+          const update = (value) => {
+            const next = Math.min(max, Math.max(min, Number(value) || fallback));
+            range.value = next;
+            number.value = next;
+            localStorage.setItem(key, String(next));
+            window.__xandersarcadeApplyAppearanceAdjustments?.();
+          };
+          range.addEventListener("input", () => update(range.value));
+          number.addEventListener("input", () => update(number.value));
+        });
+      });
+    </script>
+    <style>
+      main.themes-page { display: block !important; width: min(1500px, calc(100vw - 140px)) !important; max-width: none !important; margin: 30px auto 0 !important; text-align: center; }
+      .themes-subtitle { margin: 0 auto 24px; color: var(--text-secondary-color); }
+      .appearance-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; width: 100%; margin: 0 auto 24px; text-align: left; }
+      .appearance-control { padding: 18px; border: 1px solid var(--border-color); border-radius: 16px; background: color-mix(in srgb, var(--bg-2-color) 82%, transparent); box-shadow: 0 12px 28px rgba(0,0,0,.12); }
+      .appearance-control h2 { margin: 0 0 6px; font-size: 1rem; color: var(--text-color); }
+      .appearance-control p { min-height: 2.6em; margin: 0 0 12px; color: var(--text-secondary-color); font-size: .82rem; }
+      .appearance-input { box-sizing: border-box; width: 100%; min-height: 40px; margin-top: 8px; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-color); color: var(--text-color); }
+      .appearance-toggle { display: flex; align-items: center; gap: 10px; margin-top: 12px; color: var(--text-color); font-weight: 600; cursor: pointer; }
+      .appearance-toggle input { width: 18px; height: 18px; accent-color: var(--primary-color); }
+      .appearance-tuning { width: auto; min-width: 0; margin: 0; padding: 18px; box-sizing: border-box; border: 1px solid var(--border-color); border-radius: 16px; background: color-mix(in srgb, var(--bg-2-color) 82%, transparent); text-align: left; }
+      .appearance-tuning h2 { margin: 0 0 14px; font-size: 1.05rem; color: var(--text-color); }
+      .tuning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+      .tuning-control { display: grid; gap: 9px; color: var(--text-color); font-weight: 700; }
+      .tuning-inputs { display: flex; align-items: center; gap: 8px; }
+      .tuning-inputs input[type="range"] { flex: 1 1 auto; min-width: 0; accent-color: var(--primary-color); }
+      .tuning-inputs input[type="number"] { width: 64px; box-sizing: border-box; padding: 7px 6px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-color); }
+      .tuning-inputs span { color: var(--text-secondary-color); }
+      main.themes-page .themes-card { display: block !important; width: 100% !important; margin: 0 auto; padding: 0; background: transparent; border: 0; box-shadow: none; }
+      main.themes-page .themes-grid { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important; grid-auto-flow: row; gap: 16px; width: 100% !important; max-width: none !important; text-align: left; }
+      main.themes-page .theme-option { width: auto !important; min-width: 0; }
+      .theme-option { display: flex; align-items: center; justify-content: center; position: relative; min-height: 48px; padding: 8px 58px 8px 14px; border: 3px solid color-mix(in srgb, var(--theme-primary) 70%, var(--border-color)); border-radius: 13px; color: var(--text-color); background: var(--theme-background); text-align: center; cursor: pointer; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+      .theme-option:hover, .theme-option:focus-visible { transform: translateY(-2px); border-color: var(--theme-primary); box-shadow: 0 8px 20px color-mix(in srgb, var(--theme-primary) 22%, transparent); outline: none; }
+      .theme-option.active { box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-primary) 34%, transparent), 0 8px 20px color-mix(in srgb, var(--theme-primary) 18%, transparent); }
+      .theme-option-name { overflow: hidden; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .84rem; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+      .theme-option-palette { display: flex; position: absolute; right: 10px; gap: 4px; }
+      .theme-option-palette i { display: block; width: 13px; height: 13px; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; }
+      .theme-option-palette i:nth-child(1) { background: var(--theme-primary); }
+      .theme-option-palette i:nth-child(2) { background: var(--theme-accent); }
+      .theme-option-palette i:nth-child(3) { background: var(--theme-background); }
+      .themes-status { min-height: 1.5em; margin: 0; color: var(--primary-color); font-size: 0.9rem; }
+      .topography-settings { width: 100%; box-sizing: border-box; margin: 24px auto 0; padding: 18px; border: 1px solid var(--border-color); border-radius: 16px; background: color-mix(in srgb, var(--bg-2-color) 86%, transparent); text-align: left; }
+      .topography-settings[hidden] { display: none; }
+      .topography-settings-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+      .topography-settings-heading h2 { margin: 0; color: var(--text-color); font-size: 1.05rem; }
+      .topography-settings-heading p { margin: 4px 0 0; color: var(--text-secondary-color); font-size: .82rem; }
+      .topography-settings-heading button { border: 1px solid var(--border-color); border-radius: 9px; padding: 8px 12px; background: var(--bg-color); color: var(--text-color); cursor: pointer; }
+      .topography-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+      .topography-control { display: grid; gap: 8px; min-height: 52px; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--bg-color) 70%, transparent); color: var(--text-color); font-size: .84rem; font-weight: 700; }
+      .topography-control > span { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .topography-control output, .topography-control code { color: var(--text-secondary-color); font-family: ui-monospace, monospace; font-size: .78rem; }
+      .topography-control input[type="range"] { width: 100%; accent-color: var(--primary-color); }
+      .topography-control input[type="color"] { width: 100%; height: 24px; padding: 0; border: 1px solid var(--border-color); border-radius: 6px; background: transparent; }
+      .topography-control select { width: 100%; padding: 6px; border: 1px solid var(--border-color); border-radius: 7px; background: var(--bg-color); color: var(--text-color); }
+      .topography-control input[type="checkbox"] { width: 19px; height: 19px; accent-color: var(--primary-color); }
+      @media (max-width: 900px) { .appearance-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } .topography-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 540px) { .appearance-controls, .topography-controls { grid-template-columns: 1fr; } .topography-settings-heading { align-items: flex-start; } }
+      @media (max-width: 800px) { main.themes-page { width: calc(100vw - 18px) !important; margin-top: 24px !important; } main.themes-page .themes-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; gap: 12px; } main.themes-page .theme-option { min-height: 46px; padding-right: 52px; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+  </body>
+</html>

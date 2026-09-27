@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "include": [
+    "/api/*",
+    "/bare/*",
+    "/baremux/*",
+    "/wisp/*",
+    "/epoxy/*",
+    "/libcurl/*",
+    "/bareasmodule/*",
+    "/scramjet/*"
+  ],
+  "exclude": []
+}

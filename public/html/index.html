@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090810" />
+    <meta name="description" content="Install VoidOS, the Xanders Arcade app." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="VoidOS" />
+    <link rel="manifest" href="/app-manifest.json" />
+    <link rel="apple-touch-icon" href="/media/xandersarcade-logo.png" />
+    <link rel="icon" href="/media/xandersarcade-logo.png" type="image/png" />
+    <title>Get VoidOS</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font: 16px/1.55 system-ui, sans-serif;
+        color: #f4f1ff;
+        background: #090810;
+      }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100svh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, .2), transparent 55%),
+          #090810;
+      }
+      main {
+        width: min(500px, 100%);
+        padding: clamp(26px, 7vw, 44px);
+        border: 1px solid rgba(210, 195, 255, .16);
+        border-radius: 24px;
+        background: rgba(20, 17, 31, .92);
+        box-shadow: 0 28px 90px #0008;
+        text-align: center;
+      }
+      .brand-icon { width: 76px; height: 76px; object-fit: contain; }
+      .eyebrow {
+        margin: 18px 0 4px;
+        color: #b8a3ff;
+        font-size: .78rem;
+        font-weight: 750;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+      h1 { margin: 0; font-size: clamp(2.4rem, 12vw, 4rem); letter-spacing: -.06em; }
+      .intro { margin: 12px 0 24px; color: #c8c2d6; }
+      .features { margin: 0 0 26px; color: #eee9fb; font-weight: 650; }
+      .actions { display: grid; gap: 11px; }
+      button, .open-link {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        padding: 11px 18px;
+        font: inherit;
+        font-weight: 750;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      button { color: #120e1c; background: #b8a3ff; }
+      button:hover { background: #c9baff; }
+      .open-link { color: #eee9fb; border-color: #454052; background: #201c2d; }
+      .install-help {
+        margin: 19px 0 0;
+        color: #aaa3b8;
+        font-size: .86rem;
+      }
+      #install-status { min-height: 1.4em; margin: 12px 0 0; color: #b8a3ff; font-size: .9rem; }
+      @media (prefers-reduced-motion: no-preference) {
+        main { animation: arrive .45s ease-out both; }
+        @keyframes arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img class="brand-icon" src="/media/xandersarcade-logo.png" alt="" />
+      <p class="eyebrow">Xanders Arcade app</p>
+      <h1>VoidOS</h1>
+      <p class="intro">Install the app for a focused, full-screen arcade experience.</p>
+      <p class="features">Games <span aria-hidden="true">·</span> Apps <span aria-hidden="true">·</span> Appearance</p>
+      <div class="actions">
+        <button id="install-button" type="button">Install VoidOS</button>
+        <a class="open-link" href="/science">Open VoidOS</a>
+      </div>
+      <p class="install-help" id="install-help">
+        On iPhone or iPad, open the Share menu and choose “Add to Home Screen.”
+        On desktop, use your browser’s Install app option.
+      </p>
+      <p id="install-status" role="status" aria-live="polite"></p>
+    </main>
+    <script src="/js/app-install.js" data-xandersarcade-app-install="true"></script>
+    <script>
+      const installButton = document.getElementById("install-button");
+      const installHelp = document.getElementById("install-help");
+      const installStatus = document.getElementById("install-status");
+      let deferredInstallPrompt = null;
+      const isStandalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true;
+
+      if (isStandalone) {
+        window.location.replace("/science");
+      }
+
+      window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        deferredInstallPrompt = event;
+        installButton.textContent = "Install VoidOS";
+        installHelp.textContent = "Add VoidOS to your device. It opens directly to Games.";
+      });
+
+      installButton.addEventListener("click", async () => {
+        if (!deferredInstallPrompt) {
+          installHelp.scrollIntoView({ behavior: "smooth", block: "center" });
+          installStatus.textContent =
+            "Use your browser menu and choose Install app or Add to Home Screen.";
+          return;
+        }
+
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+      });
+
+      window.addEventListener("appinstalled", () => {
+        installStatus.textContent = "VoidOS is installed. Open it from your apps.";
+      });
+
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        installHelp.textContent =
+          "In Safari, tap Share, then Add to Home Screen. Open VoidOS from your Home Screen.";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+name = "voidos"
+compatibility_date = "2026-08-28"
+pages_build_output_dir = "public"
+
+[vars]
+UPSTREAM_URL = "https://lunaar.org"

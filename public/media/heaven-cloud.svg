@@ -1,0 +1,28 @@
+<svg width="640" height="320" viewBox="0 0 640 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="cloudBlur" x="-20%" y="-35%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="14" />
+    </filter>
+    <radialGradient id="cloudMain" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(331 128) rotate(90) scale(132 254)">
+      <stop offset="0" stop-color="#FFFDF8" stop-opacity="0.98"/>
+      <stop offset="0.56" stop-color="#FFF7E6" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#FDE6BA" stop-opacity="0.42"/>
+    </radialGradient>
+    <radialGradient id="cloudShadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(314 212) rotate(90) scale(76 214)">
+      <stop offset="0" stop-color="#C08D4F" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#C08D4F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cloudHighlight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(248 98) rotate(90) scale(54 116)">
+      <stop offset="0" stop-color="white" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g filter="url(#cloudBlur)">
+    <ellipse cx="320" cy="210" rx="212" ry="62" fill="url(#cloudShadow)"/>
+  </g>
+  <g>
+    <path d="M129 221C82 221 44 190 44 150C44 111 81 81 127 79C141 45 181 20 228 20C272 20 311 42 328 73C341 68 355 65 371 65C423 65 466 98 475 141C521 143 558 174 558 212C558 252 515 284 462 284H129C76 284 33 256 33 221C33 186 76 158 129 158" fill="url(#cloudMain)"/>
+    <path d="M165 195C177 151 224 120 277 120C308 120 339 131 361 151C385 138 415 133 444 138C476 144 501 161 516 188C496 168 468 156 437 156C415 156 393 162 374 174C350 153 318 141 284 141C236 141 192 164 165 195Z" fill="url(#cloudHighlight)"/>
+    <path d="M117 231C146 247 184 255 225 255H459C490 255 519 247 542 232C519 263 482 283 440 283H150C114 283 81 268 59 244C76 243 97 239 117 231Z" fill="white" fill-opacity="0.18"/>
+  </g>
+</svg>

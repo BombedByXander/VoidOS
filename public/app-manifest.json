@@ -1,0 +1,22 @@
+{
+  "id": "/science",
+  "name": "VoidOS",
+  "short_name": "VoidOS",
+  "description": "Xanders Arcade as an installable app.",
+  "start_url": "/science",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#090810",
+  "theme_color": "#090810",
+  "orientation": "any",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/media/xandersarcade-logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

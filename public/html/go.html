@@ -1,0 +1,1528 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoidOS</title>
+    <meta
+      name="title"
+      content="VoidOS"
+    />
+    <meta
+      name="description"
+      content="VoidOS"
+    />
+    <meta
+      name="keywords"
+      content="educational portal, online learning, study materials, academic resources, free courses, student tools, learning platform, education, study guides"
+    />
+    <meta name="author" content="Parcoil" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lunaar.org/" />
+    <meta
+      property="og:title"
+      content="VoidOS"
+    />
+    <meta
+      property="og:description"
+      content="VoidOS"
+    />
+    <meta property="og:image" content="/media/xandersarcade-logo.png" />
+    <meta property="og:site_name" content="VoidOS" />
+    <link rel="icon" href="/media/xandersarcade-logo.png" type="image/png" id="favicon">
+    <!-- space theme removed -->
+    <link rel="stylesheet" href="/css/theme.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <!-- Font icons removed -->
+    <link rel="stylesheet" type="text/css" href="/css/toastify.min.css" />
+    <script src="/js/cloak.js"></script>
+    <!-- Google Tag and AdSense removed -->
+    <script>
+      //prettier-ignore
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init("phc_P06vTyQqGuoDZVvO6sIw4diVNQH1vcqahBmrqhx1TrO", {
+        api_host: "https://us.i.posthog.com",
+        defaults: "2025-05-24",
+      });
+    </script>
+  </head>
+  <body class="xandersarcade-game-player" style="overflow: hidden">
+    <div id="tab-bar">
+      <div id="tabs"></div>
+      <button id="new-tab" class="btn"><i data-lucide="plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="proxy-container">
+      <nav class="navbar-proxy">
+        <div class="navbar-links">
+          <div class="player-nav-controls player-nav-controls-left">
+            <button id="prx-home" class="player-home-button" type="button" aria-label="VoidOS Games" title="Return to Games">
+              <i data-lucide="house" aria-hidden="true"></i>
+              <span>Home</span>
+            </button>
+          </div>
+          <button id="player-ui-toggle" class="player-ui-toggle" type="button" aria-label="Hide browser bar" title="Hide browser bar">
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="proxy-address-shell">
+          <img id="proxy-favicon" alt="" aria-hidden="true" />
+          <input
+            type="text"
+            id="proxy-address"
+            placeholder="Enter URL..."
+            class="input navbar-input"
+            autocomplete="off"
+          />
+          </div>
+          <div class="player-nav-controls player-nav-controls-right">
+            <a id="prx-bck" class="navbar-link pro" aria-label="Back" title="Back"><i data-lucide="arrow-left" aria-hidden="true"></i></a>
+            <a id="prx-fwd" class="navbar-link pro" aria-label="Forward" title="Forward"><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+            <a id="prx-refresh" class="navbar-link pro" aria-label="Refresh" title="Refresh"><i data-lucide="rotate-cw" aria-hidden="true"></i></a>
+            <a id="prx-inspect" class="navbar-link pro" aria-label="Inspect" title="Inspect"><i data-lucide="code" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <button id="player-ui-restore" class="player-ui-toggle player-ui-restore" type="button" aria-label="Show browser controls" title="Show browser controls">
+      <i data-lucide="chevron-up" aria-hidden="true"></i>
+    </button>
+    <div id="mobile-player-controls" class="mobile-player-controls" aria-label="Mobile game controls">
+      <button id="mobile-zoom-out" class="mobile-player-button" type="button" aria-label="Zoom out" title="Zoom out">
+        <i data-lucide="zoom-out" aria-hidden="true"></i>
+      </button>
+      <button id="mobile-home" class="mobile-player-button mobile-home" type="button" aria-label="Return home" title="Return home">
+        <i data-lucide="house" aria-hidden="true"></i>
+      </button>
+      <button id="mobile-zoom-in" class="mobile-player-button" type="button" aria-label="Zoom in" title="Zoom in">
+        <i data-lucide="zoom-in" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div id="autocomplete"></div>
+    <div id="frames">
+      <div id="game-loading" role="status" aria-live="polite">
+        <div class="game-loading-card">
+          <span class="game-loading-spinner" aria-hidden="true"></span>
+          <strong id="game-loading-title">Loading game</strong>
+          <span id="game-loading-message">Starting the game player...</span>
+          <button id="game-loading-retry" class="btn" type="button" hidden>Try again</button>
+        </div>
+      </div>
+    </div>
+    <style>
+      /* Keep the site shell out of the game viewport. */
+      body.xandersarcade-game-player {
+        background: #000 !important;
+        --primary-color: rgb(30, 30, 30);
+      }
+
+      /* Xbox Edge has less GPU headroom than desktop browsers. Keep the
+         controls responsive and let the game iframe own the compositor. */
+      @media (pointer: coarse) {
+        body.xandersarcade-game-player .navbar-proxy,
+        body.xandersarcade-game-player #tab-bar {
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+        }
+
+        body.xandersarcade-game-player iframe {
+          contain: strict;
+        }
+      }
+
+      body.xandersarcade-game-player::before,
+      body.xandersarcade-game-player::after,
+      body.xandersarcade-game-player #blobs,
+      body.xandersarcade-game-player #particles-js,
+      body.xandersarcade-game-player #topography-background,
+      body.xandersarcade-game-player .xandersarcade-cosmos,
+      body.xandersarcade-game-player .xandersarcade-ocean-scene,
+      body.xandersarcade-game-player .xandersarcade-volcanic-scene,
+      body.xandersarcade-game-player .xandersarcade-forest-scene,
+      body.xandersarcade-game-player .xandersarcade-campfire-scene,
+      body.xandersarcade-game-player .xandersarcade-hacker-scene,
+      body.xandersarcade-game-player .xandersarcade-heaven-scene {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+
+      .xandersarcade-game-player svg.lucide {
+        display: block;
+        width: 1em;
+        height: 1em;
+        stroke: currentColor;
+        flex-shrink: 0;
+      }
+
+      .player-ui-toggle {
+        position: fixed;
+        top: 12px;
+        right: 14px;
+        z-index: 20;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--bg-2-color) 92%, transparent);
+        color: var(--text-color);
+        cursor: pointer;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+        backdrop-filter: blur(12px);
+        transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      .player-ui-toggle:hover,
+      .player-ui-toggle:focus-visible {
+        color: var(--primary-color);
+        background: var(--bg-2-color);
+        transform: translateY(-1px);
+      }
+
+      #mobile-player-controls,
+      .mobile-player-button {
+        display: none;
+      }
+
+      body.xandersarcade-game-player.toolbar-collapsed .proxy-container,
+      body.xandersarcade-game-player.toolbar-collapsed #tab-bar {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-110%);
+      }
+
+      .proxy-container,
+      #tab-bar {
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+
+      body.xandersarcade-game-player.toolbar-collapsed #frames iframe.active {
+        height: 100vh;
+      }
+
+      body.xandersarcade-game-player.toolbar-collapsed #frames {
+        top: 0;
+      }
+
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-toggle {
+        color: var(--primary-color);
+      }
+
+      #frames {
+        position: fixed;
+        top: var(--player-toolbar-height, 115px);
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        transition: top 0.22s ease;
+      }
+
+      #game-loading {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        display: grid;
+        place-items: center;
+        background: #000;
+        color: var(--text-color);
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+      }
+
+      #game-loading[hidden] {
+        display: none;
+      }
+
+      .game-loading-card {
+        display: grid;
+        justify-items: center;
+        gap: 10px;
+        min-width: min(300px, calc(100vw - 40px));
+        padding: 24px;
+        border: 1px solid var(--border-color);
+        border-radius: 18px;
+        background: color-mix(in srgb, var(--bg-2-color) 86%, transparent);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      .game-loading-card > span:last-of-type {
+        color: var(--text-secondary-color);
+        font-size: 0.9rem;
+      }
+
+      .game-loading-spinner {
+        width: 24px;
+        height: 24px;
+        border: 2px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: gameLoadingSpin 0.8s linear infinite;
+      }
+
+      @keyframes gameLoadingSpin {
+        to { transform: rotate(360deg); }
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      #tab-bar {
+        display: flex;
+        align-items: center;
+        background: var(--bg-2-color);
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+        z-index: 10;
+      }
+
+      #tabs {
+        display: flex;
+        gap: 8px;
+        margin-right: 12px;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) transparent;
+        padding: 2px 0;
+      }
+
+      #tabs::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      #tabs::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 4px;
+      }
+
+      .tab {
+        background: var(--bg-color);
+        min-width: 150px;
+        max-width: 200px;
+        border: 1px solid var(--border-color);
+        padding: 8px 12px;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tab::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      .tab:hover::before {
+        width: 100%;
+      }
+
+      .tab:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+      }
+
+      .tab.active {
+        /* background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        ); */
+        background-color: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+      }
+
+      .tab span {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .tab i.close {
+        font-size: 11px;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        opacity: 0.7;
+      }
+
+      .tab i.close:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .tab.active i.close:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      #new-tab {
+        margin-left: 4px;
+        padding: 8px 12px;
+        font-size: 14px;
+        transition: all 0.2s ease;
+      }
+
+      #new-tab:hover {
+        transform: rotate(90deg) scale(1.1);
+      }
+
+      .navbar-proxy {
+        background: var(--bg-2-color);
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+        z-index: 9;
+      }
+
+      .navbar-links {
+        gap: 6px;
+        align-items: center;
+      }
+
+      .navbar-link.pro {
+        padding: 10px 12px !important;
+        border-radius: var(--border-radius);
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .navbar-link.pro::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(146, 130, 251, 0.2);
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.3s ease,
+          height 0.3s ease;
+      }
+
+      .navbar-link.pro:hover::before {
+        width: 100%;
+        height: 100%;
+      }
+
+      .navbar-link.pro:active {
+        transform: scale(0.95);
+      }
+
+      #proxy-address {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px 16px;
+        border-radius: calc(var(--border-radius) * 1.5);
+        transition: all 0.2s ease;
+        font-weight: 400;
+      }
+
+      #proxy-address:focus {
+        box-shadow: 0 0 0 3px rgba(146, 130, 251, 0.2);
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: none;
+        border-radius: 0;
+        background: var(--bg-color);
+      }
+
+      iframe.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #autocomplete {
+        position: absolute;
+        left: 130px;
+        margin: 0 auto;
+        margin-top: 10px;
+        background: var(--bg-2-color);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        width: 100%;
+        max-width: 500px;
+        max-height: 240px;
+        overflow-y: auto;
+        z-index: 999;
+        padding: 4px 0;
+        animation: slideDown 0.2s ease;
+        display: none;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #autocomplete div {
+        padding: 10px 16px;
+        cursor: pointer;
+        display: flex;
+        color: var(--text-color);
+        transition: all 0.15s ease;
+        font-size: 14px;
+        position: relative;
+      }
+
+      #autocomplete div::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2px;
+        height: 0;
+        background: var(--primary-color);
+        transition: height 0.2s ease;
+      }
+
+      #autocomplete div:hover::before,
+      #autocomplete div.active::before {
+        height: 100%;
+      }
+
+      #autocomplete div:hover,
+      #autocomplete div.active {
+        background: linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--primary-color) 80%, rgb(14, 14, 14) 85%),
+          transparent
+        );
+        color: #fff;
+        padding-left: 20px;
+      }
+
+      /* Responsive improvements */
+      @media (max-width: 768px) {
+        #tab-bar {
+          padding: 6px 8px;
+        }
+
+        .tab {
+          min-width: 120px;
+          padding: 6px 10px;
+        }
+
+        .navbar-proxy {
+          padding: 8px 12px;
+        }
+
+        #proxy-address {
+          font-size: 14px;
+          padding: 8px 12px;
+        }
+
+        .navbar-link.pro {
+          padding: 8px 10px !important;
+        }
+      }
+
+      @media (max-width: 600px) {
+        body.xandersarcade-game-player {
+          min-height: 100svh;
+          padding: 0;
+        }
+
+        /* Mobile game mode: the game owns the whole viewport. */
+        body.xandersarcade-game-player #tab-bar,
+        body.xandersarcade-game-player .proxy-container,
+        body.xandersarcade-game-player .player-ui-toggle {
+          display: none !important;
+        }
+
+        body.xandersarcade-game-player #frames,
+        body.xandersarcade-game-player #frames iframe.active {
+          top: 0 !important;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 100vw;
+          height: 100svh !important;
+          max-height: 100svh;
+        }
+
+        body.xandersarcade-game-player #mobile-player-controls {
+          position: fixed;
+          top: max(10px, env(safe-area-inset-top));
+          left: max(10px, env(safe-area-inset-left));
+          z-index: 20;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 4px;
+          border: 1px solid color-mix(in srgb, var(--primary-color) 46%, transparent);
+          border-radius: 15px;
+          background: color-mix(in srgb, #000 62%, transparent);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+          backdrop-filter: blur(8px);
+        }
+
+        body.xandersarcade-game-player .mobile-player-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 47px;
+          height: 47px;
+          padding: 0;
+          border: 0;
+          border-radius: 11px;
+          background: transparent;
+          color: #fff;
+          cursor: pointer;
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+          transition: background 0.15s ease, transform 0.15s ease;
+        }
+
+        body.xandersarcade-game-player .mobile-player-button:active {
+          background: rgba(255, 255, 255, 0.14);
+          transform: scale(0.94);
+        }
+
+        body.xandersarcade-game-player .mobile-player-button svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        body.xandersarcade-game-player .mobile-home {
+          position: static;
+          top: auto;
+          left: auto;
+        }
+
+        @media (orientation: landscape) {
+          body.xandersarcade-game-player #frames,
+          body.xandersarcade-game-player #frames iframe.active {
+            width: 100vw;
+            height: 100svh !important;
+          }
+        }
+
+        #tab-bar {
+          flex-wrap: wrap;
+          gap: 6px;
+          padding: 6px max(8px, env(safe-area-inset-right)) 6px max(8px, env(safe-area-inset-left));
+          max-height: 112px;
+          overflow: auto;
+        }
+
+        #tabs {
+          order: 2;
+          width: 100%;
+          margin: 0;
+          min-height: 34px;
+        }
+
+        .tab {
+          min-width: 116px;
+          max-width: 70vw;
+          padding: 7px 9px;
+        }
+
+        #new-tab {
+          padding: 8px 11px;
+        }
+
+        .navbar-proxy {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 6px;
+          padding: 6px 8px;
+        }
+
+        .navbar-proxy .navbar-links {
+          grid-column: 1 / -1;
+          justify-content: space-between;
+          gap: 2px;
+          overflow-x: auto;
+        }
+
+        .navbar-link.pro {
+          min-height: 38px;
+          padding: 7px 9px !important;
+          white-space: nowrap;
+        }
+
+        #proxy-address {
+          min-width: 0;
+          height: 42px;
+          padding: 8px 11px;
+          font-size: 13px;
+        }
+
+        #frames {
+          top: var(--player-toolbar-height, 158px);
+          height: calc(100svh - var(--player-toolbar-height, 158px));
+        }
+
+        body.xandersarcade-game-player.toolbar-collapsed #frames {
+          top: 0;
+          height: 100svh;
+        }
+
+        .player-ui-toggle {
+          right: 10px;
+          bottom: max(10px, env(safe-area-inset-bottom));
+          min-width: 42px;
+          min-height: 42px;
+        }
+      }
+
+      /* A phone becomes wider than 600px when rotated. Keep mobile game mode
+         active in landscape instead of restoring the desktop player chrome. */
+      @media (orientation: landscape) and (pointer: coarse) and (hover: none) {
+        body.xandersarcade-game-player #tab-bar,
+        body.xandersarcade-game-player .proxy-container,
+        body.xandersarcade-game-player .player-ui-toggle {
+          display: none !important;
+        }
+
+        body.xandersarcade-game-player #frames,
+        body.xandersarcade-game-player #frames iframe.active {
+          top: 0 !important;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 100vw;
+          height: 100svh !important;
+          max-height: 100svh;
+        }
+
+        body.xandersarcade-game-player #mobile-player-controls {
+          display: inline-flex;
+          position: fixed;
+          top: max(10px, env(safe-area-inset-top));
+          left: max(10px, env(safe-area-inset-left));
+          z-index: 20;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 4px;
+          border: 1px solid color-mix(in srgb, var(--primary-color) 46%, transparent);
+          border-radius: 15px;
+          background: color-mix(in srgb, #000 62%, transparent);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+          backdrop-filter: blur(8px);
+        }
+
+        body.xandersarcade-game-player .mobile-player-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 47px;
+          height: 47px;
+          padding: 0;
+          border: 0;
+          border-radius: 11px;
+          background: transparent;
+          color: #fff;
+          cursor: pointer;
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+          transition: background 0.15s ease, transform 0.15s ease;
+        }
+
+        body.xandersarcade-game-player .mobile-player-button:active {
+          background: rgba(255, 255, 255, 0.14);
+          transform: scale(0.94);
+        }
+
+        body.xandersarcade-game-player .mobile-player-button svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        body.xandersarcade-game-player .mobile-home {
+          position: static;
+          top: auto;
+          left: auto;
+        }
+      }
+
+      /* Keep the URL and controls toolbar at the requested 41px height. */
+      .proxy-container .navbar-proxy {
+        box-sizing: border-box;
+        height: 41px;
+        min-height: 41px;
+        padding-block: 0;
+      }
+
+      .navbar-proxy .navbar-links {
+        height: 100%;
+      }
+
+      .navbar-proxy .navbar-link.pro {
+        box-sizing: border-box;
+        min-height: 0;
+        height: 31px;
+        padding-block: 4px !important;
+      }
+
+      .navbar-proxy #proxy-address {
+        box-sizing: border-box;
+        height: 31px;
+        padding-block: 4px;
+      }
+
+      /* Single-row browser controls docked beneath the game viewport. */
+      body.xandersarcade-game-player #tab-bar { display: none !important; }
+      body.xandersarcade-game-player .proxy-container {
+        position: fixed; inset: auto 0 0; z-index: 19;
+        transition: transform .22s ease, opacity .22s ease;
+      }
+      body.xandersarcade-game-player .navbar-proxy {
+        position: relative;
+        height: 52px; min-height: 52px; padding: 5px 12px;
+        border-top: 1px solid #3a3a3a !important; border-bottom: 0 !important;
+        border-left: 0 !important; border-right: 0 !important;
+        background: rgb(30, 30, 30) !important; box-shadow: none !important;
+        backdrop-filter: blur(16px);
+      }
+      body.xandersarcade-game-player .navbar-links {
+        position: relative; display: grid; grid-template-columns: minmax(70px, 1fr) minmax(120px, min(50vw, 940px)) minmax(150px, 1fr);
+        align-items: center; justify-content: space-between; gap: 20px; width: 100%; height: 100%;
+      }
+      .player-nav-controls { display: flex; align-items: center; gap: 16px; }
+      .player-nav-controls-left { justify-content: flex-start; }
+      .player-nav-controls-right { justify-content: flex-end; gap: 16px; }
+      .player-nav-controls-right .navbar-link.pro {
+        display: inline-flex; flex: 0 0 38px; align-items: center; justify-content: center;
+        box-sizing: border-box; width: 38px; min-width: 38px; max-width: 38px; height: 38px;
+        padding: 8px !important; border: 1px solid #484848 !important; border-radius: 8px;
+        background: transparent; color: #d6d6d6;
+      }
+      .player-nav-controls-right .navbar-link.pro:hover { color: #fff; background: #3a3a3a; border-color: #666 !important; }
+      .player-nav-controls-right .navbar-link.pro svg { width: 18px; height: 18px; }
+      .player-home-button {
+        display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; gap: 7px;
+        min-width: 72px; height: 38px; padding: 0 10px; border: 1px solid #484848; border-radius: 8px;
+        background: transparent; color: #d6d6d6; font: inherit; font-size: 14px; cursor: pointer;
+      }
+      .player-home-button:hover, .player-home-button:focus-visible { color: #fff; background: #3a3a3a; border-color: #666; }
+      .player-home-button svg { width: 18px; height: 18px; }
+      .proxy-address-shell {
+        display: flex; align-items: center; gap: 8px; min-width: 0;
+        padding: 0 14px; border: 1px solid #383838; border-radius: 24px;
+        background: #101010 !important;
+      }
+      #proxy-favicon { width: 18px; height: 18px; object-fit: contain; border-radius: 4px; flex: 0 0 18px; }
+      .proxy-address-shell #proxy-address {
+        width: 100%; min-width: 0; height: 34px; padding: 4px 0;
+        border: 0; outline: 0; box-shadow: none; background: #101010 !important; color: #f1f1f1;
+      }
+      .proxy-address-shell:focus-within { border-color: #666; box-shadow: 0 0 0 2px rgba(255,255,255,.08); }
+      body.xandersarcade-game-player #frames { top: 0; bottom: 52px; height: auto; }
+      .player-ui-toggle {
+        position: absolute; left: 50%; top: -19px; z-index: 22;
+        display: inline-flex; align-items: center; justify-content: center;
+        transform: translateX(-50%); width: 48px; height: 20px; padding: 0;
+        color: #d6d6d6; border: 1px solid #484848; border-bottom: 0;
+        border-radius: 8px 8px 0 0; background: rgb(30,30,30); backdrop-filter: none; box-shadow: none;
+      }
+      .player-ui-toggle:hover, .player-ui-toggle:focus-visible { background: #3a3a3a; color: #fff; }
+      .player-ui-restore { display: none; }
+      body.xandersarcade-game-player.toolbar-collapsed .proxy-container {
+        opacity: 0; pointer-events: none; transform: translateY(110%);
+      }
+      body.xandersarcade-game-player.toolbar-collapsed #frames { top: 0; bottom: 0; }
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-toggle {
+        position: fixed; top: 14px; left: 50%; z-index: 21;
+        transform: translateX(-50%); opacity: .68; pointer-events: auto;
+        color: #eee; background: rgba(30,30,30,.78);
+        border-color: rgba(255,255,255,.18);
+      }
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-toggle:hover,
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-toggle:focus-visible { opacity: 1; }
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-restore {
+        display: inline-flex !important; position: fixed; top: 14px; left: 50%; z-index: 21;
+        transform: translateX(-50%); opacity: .68; pointer-events: auto;
+        color: #eee; background: rgba(30,30,30,.78);
+        border-color: rgba(255,255,255,.18);
+      }
+      @media (max-width: 600px), (orientation: landscape) and (pointer: coarse) and (hover: none) {
+        body.xandersarcade-game-player .proxy-container { display: block !important; }
+        body.xandersarcade-game-player .navbar-proxy { height: 52px; padding-inline: 5px; }
+        body.xandersarcade-game-player .navbar-links { grid-template-columns: auto minmax(36px, 1fr) auto; gap: 8px; }
+        .player-nav-controls { gap: 5px; }
+        .player-nav-controls-right { gap: 4px; }
+        .player-nav-controls-right .navbar-link.pro { flex-basis: 30px; width: 30px; min-width: 30px; max-width: 30px; height: 32px; padding: 5px !important; }
+        .player-home-button { min-width: 38px; width: 38px; height: 34px; padding: 0; }
+        .player-home-button span { display: none; }
+        body.xandersarcade-game-player .player-ui-toggle { width: 46px; height: 19px; top: -18px; }
+        body.xandersarcade-game-player .navbar-links .player-ui-toggle { display: inline-flex !important; }
+        .proxy-address-shell { gap: 5px; padding-inline: 7px; }
+        body.xandersarcade-game-player #frames { top: 0; bottom: 52px; height: auto; }
+      }
+
+      /* Keep the controls visually flat and center every group in the bar. */
+      body.xandersarcade-game-player .navbar-proxy { padding-block: 2px; }
+      body.xandersarcade-game-player .navbar-links,
+      body.xandersarcade-game-player .player-nav-controls { align-items: center; }
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:hover,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:focus,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:focus-visible,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:active,
+      body.xandersarcade-game-player .player-ui-toggle,
+      body.xandersarcade-game-player .player-ui-toggle:hover,
+      body.xandersarcade-game-player .player-ui-toggle:focus,
+      body.xandersarcade-game-player .player-ui-toggle:focus-visible,
+      body.xandersarcade-game-player .player-ui-toggle:active {
+        border: 0 !important; outline: 0 !important; box-shadow: none !important;
+        background: transparent !important; filter: none !important;
+        transition: none !important;
+      }
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:hover,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:focus,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:focus-visible,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:active {
+        flex: 0 0 38px; width: 38px; min-width: 38px; max-width: 38px;
+        height: 38px; color: #d6d6d6;
+      }
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro::before,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro::after { display: none !important; content: none !important; }
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:hover svg,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:focus-visible svg,
+      body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:active svg {
+        transform: none !important; filter: none !important;
+      }
+      body.xandersarcade-game-player .player-ui-toggle {
+        background: #1e1e1e !important; color: #d6d6d6;
+        transform: translateX(-50%) !important;
+      }
+      body.xandersarcade-game-player .player-ui-toggle:hover,
+      body.xandersarcade-game-player .player-ui-toggle:focus,
+      body.xandersarcade-game-player .player-ui-toggle:focus-visible,
+      body.xandersarcade-game-player .player-ui-toggle:active {
+        color: #d6d6d6;
+      }
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-restore,
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-restore:hover,
+      body.xandersarcade-game-player.toolbar-collapsed .player-ui-restore:focus-visible {
+        top: auto; bottom: -5px; left: 50%; width: 48px; height: 24px;
+        transform: translateX(-50%) !important; display: inline-flex !important;
+        opacity: .72; border: 0 !important; border-radius: 8px 8px 0 0;
+        outline: 0 !important; box-shadow: none !important;
+        background: rgba(30,30,30,.68) !important; color: #ededed;
+      }
+      @media (max-width: 600px), (orientation: landscape) and (pointer: coarse) and (hover: none) {
+        body.xandersarcade-game-player .navbar-proxy { padding-block: 2px; }
+        body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro,
+        body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:hover,
+        body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:focus-visible,
+        body.xandersarcade-game-player .player-nav-controls-right .navbar-link.pro:active {
+          flex-basis: 30px; width: 30px; min-width: 30px; max-width: 30px; height: 32px;
+        }
+        body.xandersarcade-game-player.toolbar-collapsed .player-ui-restore {
+          bottom: max(-5px, env(safe-area-inset-bottom));
+        }
+      }
+    </style>
+
+    <script src="https://unpkg.com/lucide@1.7.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-config.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+      window.lucide?.createIcons?.();
+      document.addEventListener("DOMContentLoaded", async () => {
+        const prxBck = document.getElementById("prx-bck");
+        const prxFwd = document.getElementById("prx-fwd");
+        const prxRefresh = document.getElementById("prx-refresh");
+        const prxAddress = document.getElementById("proxy-address");
+        const proxyFavicon = document.getElementById("proxy-favicon");
+        const prxHome = document.getElementById("prx-home");
+        const prxInspect = document.getElementById("prx-inspect");
+        const playerUiToggle = document.getElementById("player-ui-toggle");
+        const playerUiRestore = document.getElementById("player-ui-restore");
+        const loading = document.getElementById("game-loading");
+        const loadingTitle = document.getElementById("game-loading-title");
+        const loadingMessage = document.getElementById("game-loading-message");
+        const loadingRetry = document.getElementById("game-loading-retry");
+        const mobileHome = document.getElementById("mobile-home");
+        const mobileZoomOut = document.getElementById("mobile-zoom-out");
+        const mobileZoomIn = document.getElementById("mobile-zoom-in");
+
+        const isXboxEdge = /Xbox/i.test(navigator.userAgent || "");
+        const isMobileDevice = window.matchMedia?.("(max-width: 800px), (pointer: coarse)").matches === true;
+
+        async function prepareProxy() {
+          if (!window.isSecureContext && !["localhost", "127.0.0.1"].includes(location.hostname)) {
+            throw new Error("The proxy requires a secure HTTPS connection.");
+          }
+          if (!navigator.serviceWorker) {
+            throw new Error("Microsoft Edge on this device is blocking service workers.");
+          }
+          if (!window.WebAssembly || !window.WebSocket) {
+            throw new Error("This browser does not provide the features required by the proxy.");
+          }
+
+          const backend = localStorage.getItem("proxy-backend") === "ultraviolet"
+            ? "ultraviolet"
+            : "scramjet";
+          if (backend === "ultraviolet") {
+            await window.ensureUltravioletReady?.();
+          } else {
+            await window.ensureScramjetReady?.();
+          }
+        }
+
+        function showProxyStartupError(error) {
+          const detail = error instanceof Error ? error.message : String(error || "Unknown proxy error");
+          console.error("Proxy startup failed:", error);
+          setLoading(true, "Proxy could not start", isXboxEdge
+            ? "Edge on Xbox could not connect to the proxy. Try again, or allow cookies and site data for this site."
+            : "The proxy could not connect. Check your connection and try again.", true);
+          if (loadingMessage) loadingMessage.title = detail;
+        }
+
+        function looksLikeProxyError(frame) {
+          try {
+            const documentText = `${frame.contentDocument?.title || ""} ${frame.contentDocument?.body?.innerText || ""}`.toLowerCase();
+            return documentText.includes("error processing request") ||
+              (documentText.includes("failed to load") && documentText.includes("internal server error"));
+          } catch {
+            return false;
+          }
+        }
+
+        async function encodeForBackend(url, backend) {
+          if (backend === "ultraviolet") {
+            await window.ensureUltravioletReady?.();
+            return window.encodeAny?.(url) || null;
+          }
+
+          await window.ensureScramjetReady?.();
+          return window.sjEncodeAndGo?.(url) || null;
+        }
+
+        async function recoverGameFrame(frame) {
+          if (frame.dataset.directFrame === "true") return false;
+          if (!isMobileDevice) return false;
+          const originalUrl = frame.dataset.originalUrl;
+          if (!originalUrl || !/^https?:\/\//i.test(originalUrl)) return false;
+
+          const attempts = Number(frame.dataset.proxyAttempts || "0");
+          if (attempts >= 2) return false;
+          frame.dataset.proxyAttempts = String(attempts + 1);
+
+          const currentBackend = localStorage.getItem("proxy-backend") === "ultraviolet"
+            ? "ultraviolet"
+            : "scramjet";
+          const alternateBackend = currentBackend === "ultraviolet" ? "scramjet" : "ultraviolet";
+
+          setLoading(true, "Trying another connection", "The first proxy connection did not respond...");
+          try {
+            const alternateUrl = await encodeForBackend(originalUrl, alternateBackend);
+            if (alternateUrl) {
+              frame.src = alternateUrl;
+              return true;
+            }
+          } catch (error) {
+            console.warn(`The ${alternateBackend} fallback failed:`, error);
+          }
+
+          // Some games do not need rewriting at all. Let those games load
+          // directly instead of trapping the player on a proxy error page.
+          frame.dataset.directFallback = "true";
+          frame.src = originalUrl;
+          return true;
+        }
+
+        let devTools = false;
+        const tabsContainer = document.getElementById("tabs");
+        const framesContainer = document.getElementById("frames");
+        const newTabBtn = document.getElementById("new-tab");
+        let tabCount = 0;
+        let loadingFrame = null;
+        let mobileZoom = 1;
+
+        function updateMobileZoom() {
+          const activeFrame = getActiveFrame();
+          if (!activeFrame) return;
+          activeFrame.style.transform = `scale(${mobileZoom})`;
+          activeFrame.style.transformOrigin = "center center";
+        }
+
+        mobileZoomOut?.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          mobileZoom = Math.max(0.05, mobileZoom - 0.1);
+          updateMobileZoom();
+        });
+
+        mobileZoomIn?.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          mobileZoom += 0.1;
+          updateMobileZoom();
+        });
+
+        mobileHome?.addEventListener("click", () => {
+          window.location.href = "/science";
+        });
+
+        const setLoading = (visible, title = "Loading game", message = "Starting the game player...", canRetry = false) => {
+          if (!loading) return;
+          loading.hidden = !visible;
+          if (loadingTitle) loadingTitle.textContent = title;
+          if (loadingMessage) loadingMessage.textContent = message;
+          if (loadingRetry) loadingRetry.hidden = !canRetry;
+        };
+
+        async function loadCdnGame(frame, url) {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) throw new Error(`CDN returned ${response.status}`);
+          let html = await response.text();
+          const baseHref = new URL(".", url).href.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+          if (/<head\b[^>]*>/i.test(html)) {
+            html = html.replace(/<head\b([^>]*)>/i, `<head$1><base href="${baseHref}">`);
+          } else {
+            html = `<!doctype html><html><head><base href="${baseHref}"></head><body>${html}</body></html>`;
+          }
+          frame.removeAttribute("src");
+          frame.contentDocument.open();
+          frame.contentDocument.write(html);
+          frame.contentDocument.close();
+          frame.dataset.originalUrl = url;
+        }
+
+        playerUiToggle?.addEventListener("click", () => {
+          const collapsed = document.body.classList.toggle("toolbar-collapsed");
+          updatePlayerLayout();
+          playerUiToggle.setAttribute("aria-label", collapsed ? "Show browser controls" : "Hide browser controls");
+          playerUiToggle.title = collapsed ? "Show browser controls" : "Hide browser controls";
+          playerUiToggle.innerHTML = '<i data-lucide="chevron-down" aria-hidden="true"></i>';
+          window.lucide?.createIcons?.({ root: playerUiToggle });
+          window.setTimeout(updatePlayerLayout, 240);
+        });
+        playerUiRestore?.addEventListener("click", () => playerUiToggle?.click());
+
+        function updatePlayerLayout() {
+          if (!document.body.classList.contains("toolbar-collapsed")) {
+            const toolbarHeight = (document.getElementById("tab-bar")?.offsetHeight || 0)
+              + (document.querySelector(".proxy-container")?.offsetHeight || 0);
+            document.documentElement.style.setProperty("--player-toolbar-height", `${toolbarHeight}px`);
+          }
+
+          const frame = getActiveFrame();
+          if (!frame) return;
+          try {
+            frame.contentWindow.dispatchEvent(new Event("resize"));
+            frame.contentWindow.postMessage({ type: "xandersarcade:player-resize" }, "*");
+          } catch {
+            // Cross-origin frames receive their normal browser resize event.
+          }
+        }
+
+        const playerToolbarObserver = new ResizeObserver(updatePlayerLayout);
+        playerToolbarObserver.observe(document.getElementById("tab-bar"));
+        playerToolbarObserver.observe(document.querySelector(".proxy-container"));
+        window.addEventListener("resize", updatePlayerLayout);
+        window.requestAnimationFrame(updatePlayerLayout);
+
+        async function createTab(url = "/new", displayUrl = url, directFrame = false) {
+          tabCount++;
+          const id = "tab-" + tabCount;
+
+          let tabLabel = `Tab ${tabCount}`;
+          try {
+            if (displayUrl && displayUrl !== "/new") {
+              tabLabel = new URL(displayUrl, window.location.href).hostname.replace(/^www\./, "") || tabLabel;
+            }
+          } catch {
+            // Keep the generic tab label when a game URL is not parseable.
+          }
+
+          const tab = document.createElement("div");
+          tab.className = "tab";
+          tab.dataset.id = id;
+          tab.innerHTML = `<span title="${tabLabel}">${tabLabel}</span> <i data-lucide="x" class="close" aria-label="Close tab"></i>`;
+          tabsContainer.appendChild(tab);
+          window.lucide?.createIcons?.({ root: tab });
+
+          const iframe = document.createElement("iframe");
+          iframe.id = id;
+          if (directFrame) iframe.dataset.directFrame = "true";
+          framesContainer.appendChild(iframe);
+          loadingFrame = iframe;
+          setLoading(true, `Loading ${tabLabel}`);
+          iframe.addEventListener("load", () => {
+            if (loadingFrame !== iframe) return;
+            window.setTimeout(async () => {
+              if (looksLikeProxyError(iframe) && await recoverGameFrame(iframe)) return;
+              setLoading(false);
+            }, 80);
+          });
+          iframe.addEventListener("error", () => {
+            if (loadingFrame !== iframe) return;
+            recoverGameFrame(iframe).then((recovered) => {
+              if (!recovered) setLoading(true, "Game could not load", "The game frame returned an error.", true);
+            });
+          });
+
+          if (url.includes("cdn.jsdelivr.net/gh/BombedByXander/lib-backup@main/")) {
+            try {
+              await loadCdnGame(iframe, url);
+              iframe.dataset.originalUrl = displayUrl;
+            } catch (error) {
+              console.error("Error loading CDN game:", error);
+              iframe.src = "/new";
+              iframe.dataset.originalUrl = "/new";
+              setLoading(true, "Game could not load", "The CDN game file could not be opened.", true);
+            }
+          } else {
+            iframe.src = url;
+            iframe.dataset.originalUrl = displayUrl;
+          }
+
+          if (iframe.contentDocument?.readyState === "complete" && loadingFrame === iframe) {
+            setLoading(false);
+          }
+
+          tab.addEventListener("click", (e) => {
+            if (e.target.classList.contains("close")) {
+              closeTab(id, tab, iframe);
+            } else {
+              activateTab(id);
+            }
+          });
+
+          activateTab(id);
+        }
+
+        function activateTab(id) {
+          document
+            .querySelectorAll(".tab")
+            .forEach((t) => t.classList.remove("active"));
+          document
+            .querySelectorAll("iframe")
+            .forEach((f) => f.classList.remove("active"));
+
+          const tab = tabsContainer.querySelector(`[data-id='${id}']`);
+          const iframe = document.getElementById(id);
+
+          if (tab && iframe) {
+            tab.classList.add("active");
+            iframe.classList.add("active");
+            prxAddress.value = iframe.dataset.originalUrl || iframe.src;
+            try {
+              const gameUrl = new URL(iframe.dataset.originalUrl || iframe.src, window.location.href);
+              proxyFavicon.src = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(gameUrl.hostname)}&sz=32`;
+              proxyFavicon.hidden = false;
+            } catch {
+              proxyFavicon.removeAttribute("src");
+              proxyFavicon.hidden = true;
+            }
+            loadingFrame = iframe;
+            updateMobileZoom();
+            try {
+              if (iframe.contentDocument?.readyState === "complete") {
+                setLoading(false);
+              } else {
+                setLoading(true, `Loading ${tab.querySelector("span")?.textContent || "game"}`);
+              }
+            } catch {
+              setLoading(true, `Loading ${tab.querySelector("span")?.textContent || "game"}`);
+            }
+          }
+        }
+
+        function closeTab(id, tab, iframe) {
+          tab.remove();
+          iframe.remove();
+
+          const remainingTabs = tabsContainer.querySelectorAll(".tab");
+          if (remainingTabs.length === 0) {
+            createTab("/new");
+            prxAddress.value = "";
+            prxAddress.focus();
+          } else {
+            const lastTab = tabsContainer.lastElementChild;
+            if (lastTab) activateTab(lastTab.dataset.id);
+          }
+        }
+
+        newTabBtn?.addEventListener("click", () => createTab());
+        loadingRetry?.addEventListener("click", async () => {
+          if (loadingFrame) {
+            const retryUrl = loadingFrame.dataset.originalUrl;
+            setLoading(true, "Retrying proxy", "Reconnecting to the game...");
+            if (loadingFrame.dataset.directFrame === "true") {
+              loadingFrame.src = retryUrl || "/new";
+              return;
+            }
+            try {
+              await prepareProxy();
+              const backend = localStorage.getItem("proxy-backend") === "ultraviolet"
+                ? "ultraviolet"
+                : "scramjet";
+              const encoded = backend === "ultraviolet"
+                ? window.encodeAny?.(retryUrl)
+                : window.sjEncodeAndGo?.(retryUrl);
+              loadingFrame.src = encoded || retryUrl || "/new";
+            } catch (error) {
+              showProxyStartupError(error);
+            }
+          } else {
+            window.location.reload();
+          }
+        });
+
+        function getActiveFrame() {
+          return document.querySelector("iframe.active");
+        }
+        prxBck.addEventListener("click", () => {
+          const frame = getActiveFrame();
+          if (frame) frame.contentWindow.history.back();
+        });
+        prxFwd.addEventListener("click", () => {
+          const frame = getActiveFrame();
+          if (frame) frame.contentWindow.history.forward();
+        });
+        prxRefresh.addEventListener("click", () => {
+          const frame = getActiveFrame();
+          if (frame) frame.contentWindow.location.reload();
+        });
+        prxHome.addEventListener("click", () => {
+          window.location.href = "/science";
+        });
+        prxInspect.addEventListener("click", () => {
+          if (devTools === false) {
+            const openEruda = () => {
+              if (!window.eruda) return;
+              window.eruda.init();
+              window.eruda.show();
+              devTools = true;
+            };
+            if (window.eruda) {
+              openEruda();
+            } else {
+              const script = document.createElement("script");
+              script.src = "https://cdn.jsdelivr.net/npm/eruda";
+              script.onload = openEruda;
+              document.head.appendChild(script);
+            }
+          } else {
+            window.eruda?.destroy();
+            devTools = false;
+          }
+        });
+
+        const searchInput = document.getElementById("proxy-address");
+        const autocompleteBox = document.getElementById("autocomplete");
+
+        async function fetchSuggestions(query) {
+          if (!query) {
+            autocompleteBox.innerHTML = "";
+            autocompleteBox.style.display = "none";
+            return;
+          }
+          try {
+            const res = await fetch(
+              `https://duckduckgo.com/ac/?q=${encodeURIComponent(query)}`,
+            );
+            const suggestions = await res.json();
+            autocompleteBox.innerHTML = "";
+            if (suggestions.length === 0) {
+              autocompleteBox.style.display = "none";
+              return;
+            }
+            suggestions.forEach((s) => {
+              const item = document.createElement("div");
+              item.textContent = s.phrase;
+              item.onclick = () => {
+                searchInput.value = s.phrase;
+                autocompleteBox.innerHTML = "";
+                autocompleteBox.style.display = "none";
+              };
+              autocompleteBox.appendChild(item);
+            });
+            autocompleteBox.style.display = "block";
+          } catch (err) {
+            console.error("Autocomplete error:", err);
+            autocompleteBox.style.display = "none";
+          }
+        }
+
+        searchInput.addEventListener("input", (e) => {
+          fetchSuggestions(e.target.value);
+        });
+
+        searchInput.addEventListener("keydown", async (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+              const frame = getActiveFrame();
+              if (frame) {
+                if (query.includes("cdn.jsdelivr.net/gh/BombedByXander/lib-backup@main/")) {
+                  try {
+                    await loadCdnGame(frame, query);
+                    frame.dataset.originalUrl = query;
+                  } catch (error) {
+                    console.error("Error loading CDN game:", error);
+                    setLoading(true, "Game could not load", "The CDN game file could not be opened.", true);
+                  }
+                } else {
+                  let urlforprx;
+                if (localStorage.getItem("proxy-backend") === "ultraviolet") {
+                    try {
+                      await prepareProxy();
+                    } catch (error) {
+                      showProxyStartupError(error);
+                      return;
+                    }
+                    urlforprx = window.encodeAny(query);
+                  } else {
+                    try {
+                      await prepareProxy();
+                    } catch (error) {
+                      showProxyStartupError(error);
+                      return;
+                    }
+                    urlforprx = window.sjEncodeAndGo(query);
+                  }
+                  // normalize invalid encoder outputs (null, empty, lone '?', '/?')
+                  if (!urlforprx || urlforprx === "?" || urlforprx === "/?") {
+                    urlforprx = "/new";
+                  }
+                  // keep sessionStorage in sync so /go flow sees the same value
+                  try {
+                    sessionStorage.setItem("lpurl", urlforprx);
+                    sessionStorage.setItem("rawurl", query);
+                  } catch (e) {}
+                  frame.src = urlforprx;
+                  frame.dataset.originalUrl = query;
+                }
+              }
+              autocompleteBox.innerHTML = "";
+              autocompleteBox.style.display = "none";
+            }
+          }
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!autocompleteBox.contains(e.target) && e.target !== searchInput) {
+            autocompleteBox.innerHTML = "";
+            autocompleteBox.style.display = "none";
+          }
+        });
+
+        const queryUrl = new URLSearchParams(window.location.search).get("url");
+        const directFrame = new URLSearchParams(window.location.search).get("direct") === "1";
+        const rawUrl = queryUrl || sessionStorage.getItem("rawurl");
+        const lpUrl = queryUrl || sessionStorage.getItem("lpurl");
+        let startUrl;
+
+        if (directFrame) {
+          startUrl = rawUrl || lpUrl || "/new";
+        } else if (lpUrl) {
+          if (lpUrl.includes("jsdelivr")) {
+            startUrl = lpUrl;
+          } else if (lpUrl.startsWith("/uv") || lpUrl.startsWith("/scramjet")) {
+            startUrl = lpUrl;
+          } else if (lpUrl.startsWith("http")) {
+            if (localStorage.getItem("proxy-backend") === "ultraviolet") {
+              startUrl = window.encodeAny?.(lpUrl) || "/new";
+            } else {
+              startUrl = window.sjEncodeAndGo?.(lpUrl) || "/new";
+            }
+          } else {
+            // Static hosting: treat lpUrl as a relative path when possible.
+            startUrl = lpUrl && lpUrl.startsWith("/") ? lpUrl : "/new";
+          }
+        } else {
+          startUrl = "/new";
+        }
+
+        if (!directFrame && startUrl !== "/new" && !startUrl.includes("jsdelivr")) {
+          try {
+            await prepareProxy();
+          } catch (error) {
+            showProxyStartupError(error);
+          }
+        }
+
+        createTab(startUrl, rawUrl || startUrl, directFrame);
+      });
+    </script>
+
+    <div class="footer">
+      <a
+        href="https://&#x47;&#x69;&#x74;&#x68;&#x75;&#x62;.com/&#x70;&#x61;&#x72;&#x63;&#x6f;&#x69;&#x6c;/&#x6c;&#x75;&#x6e;&#x61;&#x61;&#x72;.org"
+        class="link"
+        >&#x47;&#x69;&#x74;&#x68;&#x75;&#x62;</a
+      >
+      <a
+        href="&#x68;&#x74;&#x74;&#x70;&#x73;&#x3a;&#x2f;&#x2f;&#x64;&#x73;&#x63;&#x2e;&#x67;&#x67;&#x2f;&#x70;&#x61;&#x72;&#x63;&#x6f;&#x69;&#x6c;"
+        class="link"
+        >Discord</a
+      >
+    </div>
+    <script type="text/javascript" src="/js/toastify-js.js"></script>
+    <script src="/js/sweetalert2.js"></script>
+    <script src="/sj/register-sw.js" defer></script>
+    <script src="/sj/search.js" defer></script>
+    <script src="/sj/index.js" defer></script>
+    <script src="/scram/scramjet.all.js"></script>
+    <script src="/baremux/index.js" defer></script>
+    <script src="/uv/uv.bundle.js" defer></script>
+    <script src="/uv/uv.config.js" defer></script>
+    <script src="/uv/register-sw.js" defer></script>
+    <script src="/uv/search.js" defer></script>
+    <script src="/uv/proxy.js" defer></script>
+    <!-- ads removed -->
+  </body>
+</html>

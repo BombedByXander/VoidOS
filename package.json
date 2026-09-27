@@ -1,0 +1,22 @@
+{
+  "name": "voidos",
+  "version": "10.0.0",
+  "description": "Xanders Arcade as an installable app.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "format": "prettier --write .",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "http-proxy-middleware": "^3.0.5"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Classroom</title>
+    <link rel="icon" href="/media/google-classroom.svg" type="image/svg+xml" id="favicon">
+    <link rel="stylesheet" href="/css/theme.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <div class="navbar-container"></div>
+    <div id="blobs"><div class="gradiant"></div><div class="gradiant2"></div><div class="gradiant3"></div></div>
+    <div id="particles-js"></div>
+
+    <main class="account-page">
+      <section class="account-hero">
+        <div class="account-hero-copy">
+          <div class="account-kicker" id="account-hero-kicker">Supabase accounts</div>
+          <h1 id="account-hero-title">Your arcade profile</h1>
+          <p id="account-hero-description">Create an account with a username and password, add a profile picture, and track your playtime across the community.</p>
+        </div>
+      </section>
+
+      <section id="account-auth-view" class="account-grid">
+        <div class="account-card">
+          <div class="account-tabs">
+            <button class="account-tab-btn active" type="button" data-account-tab="login">Log in</button>
+            <button class="account-tab-btn" type="button" data-account-tab="register">Create account</button>
+          </div>
+
+          <form id="account-login-form" class="account-stack">
+            <label class="account-field">Username<input class="input" name="username" autocomplete="username" required maxlength="24" /></label>
+            <label class="account-field">Password<div class="password-input-wrap"><input class="input" name="password" type="password" autocomplete="current-password" required minlength="6" /><button class="password-toggle" type="button" data-password-toggle aria-label="Show password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg></button></div></label>
+            <button class="btn" type="submit">Log in</button>
+            <p id="account-login-message" role="status"></p>
+          </form>
+
+          <form id="account-register-form" class="account-stack" hidden>
+            <label class="account-field">Username<input class="input" name="username" autocomplete="username" required maxlength="24" pattern="[A-Za-z0-9._ -]+" /></label>
+            <label class="account-field">Password<div class="password-input-wrap"><input class="input" name="password" type="password" autocomplete="new-password" required minlength="6" /><button class="password-toggle" type="button" data-password-toggle aria-label="Show password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg></button></div></label>
+            <label class="account-field">Custom profile file <span class="account-help">Optional, any file type up to 2 MB</span><input class="input" name="avatar" type="file" /></label>
+            <button class="btn" type="submit">Create account</button>
+            <p id="account-register-message" role="status"></p>
+          </form>
+        </div>
+
+        <aside class="account-card account-note">
+          <div class="account-kicker">Community</div>
+          <h2>Community Leaderboard - Lifetime</h2>
+          <p>See the players and game time shared across the site.</p>
+          <div id="account-community-list" class="account-users-list"></div>
+          <p>Use a password you do not use anywhere important.</p>
+        </aside>
+      </section>
+
+      <section id="account-profile-view" class="account-grid" hidden>
+        <div class="account-card account-profile-card">
+          <div class="account-profile-heading">
+            <div class="account-profile-avatar" id="account-profile-avatar" aria-hidden="true"></div>
+            <div class="account-profile-identity">
+              <div class="account-kicker">Profile settings</div>
+              <h2 id="account-profile-name"></h2>
+              <p>Manage your picture and keep track of your lifetime playtime.</p>
+              <div id="account-profile-stats" class="account-stats"></div>
+            </div>
+          </div>
+          <div class="account-profile-settings">
+            <div class="account-profile-settings-heading">
+              <h3>Profile picture</h3>
+              <p>Choose an image, drop it here, or paste one from your clipboard. Up to 2 MB.</p>
+            </div>
+            <form id="account-avatar-form" class="account-avatar-form">
+              <input id="account-avatar-file" class="account-file-input" name="avatar" type="file" accept="image/*" aria-label="Choose profile picture" />
+              <button id="account-avatar-dropzone" class="account-upload-zone" type="button" aria-label="Choose, drop, or paste a profile picture">
+                <span class="account-upload-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3" /></svg></span>
+                <span class="account-upload-copy"><strong id="account-upload-title">Drop or paste a picture</strong><span id="account-upload-hint">or click to browse · PNG, JPG, GIF, WEBP</span></span>
+                <img id="account-avatar-preview" class="account-upload-preview" alt="Selected profile picture preview" hidden />
+              </button>
+              <div class="account-profile-buttons">
+                <button class="btn account-icon-button" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7.5" /></svg>Save picture</button>
+                <button class="btn account-icon-button account-logout-button" id="account-logout" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" /></svg>Log out</button>
+              </div>
+              <p id="account-avatar-message" role="status"></p>
+            </form>
+          </div>
+        </div>
+        <aside class="account-card account-users-card">
+          <div class="account-kicker">Community</div>
+          <h2>Community Leaderboard - Lifetime</h2>
+          <div id="account-users-list" class="account-users-list"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-config.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/account.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
