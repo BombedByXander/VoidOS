@@ -97,53 +97,6 @@
       <p id="install-status" role="status" aria-live="polite"></p>
     </main>
     <script src="/js/app-install.js" data-xandersarcade-app-install="true"></script>
-    <script>
-      const installButton = document.getElementById("install-button");
-      const installHelp = document.getElementById("install-help");
-      const installStatus = document.getElementById("install-status");
-      let deferredInstallPrompt = null;
-      document.getElementById("open-button").addEventListener("click", () => {
-        const appWindow = window.open("about:blank#voidos", "_blank");
-        if (!appWindow) {
-          installStatus.textContent =
-            "Your browser blocked the blank window. Allow pop-ups for VoidOS, then try again.";
-          return;
-        }
-
-        const appDocument = appWindow.document;
-        appDocument.open();
-        appDocument.write(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>VoidOS</title><style>html,body,iframe{width:100%;height:100%;margin:0;border:0;overflow:hidden;background:#090810}iframe{display:block}</style></head><body><iframe title="VoidOS" allow="autoplay; clipboard-read; clipboard-write; fullscreen; gamepad; picture-in-picture" allowfullscreen src="${new URL("/science", window.location.origin).href}"></iframe></body></html>`);
-        appDocument.close();
-      });
-
-      window.addEventListener("beforeinstallprompt", (event) => {
-        event.preventDefault();
-        deferredInstallPrompt = event;
-        installButton.textContent = "Install VoidOS";
-        installHelp.textContent = "Add VoidOS to your device. Open it, then launch into the about:blank#voidos app window.";
-      });
-
-      installButton.addEventListener("click", async () => {
-        if (!deferredInstallPrompt) {
-          installHelp.scrollIntoView({ behavior: "smooth", block: "center" });
-          installStatus.textContent =
-            "Use your browser menu and choose Install app or Add to Home Screen.";
-          return;
-        }
-
-        deferredInstallPrompt.prompt();
-        await deferredInstallPrompt.userChoice;
-        deferredInstallPrompt = null;
-      });
-
-      window.addEventListener("appinstalled", () => {
-        installStatus.textContent = "VoidOS is installed. Open it from your apps.";
-      });
-
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        installHelp.textContent =
-          "In Safari, tap Share, then Add to Home Screen. Open VoidOS from your Home Screen.";
-      }
-    </script>
+    <script src="/js/app-launcher.js" defer></script>
   </body>
 </html>
